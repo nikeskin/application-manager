@@ -1,0 +1,43 @@
+.Grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.Gradient {
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    grid-column-start: 3;
+    grid-column-end: 6;
+    background-image: linear-gradient(to right, rgba(105,105,105,0), rgba(105,105,105,1));
+}
+
+.InfoHeader {
+    padding: 10% 0 3%;
+    margin: 0;
+    color: white;
+    font-size: xx-large;
+}
+
+.InfoText {
+    color: white;
+    padding: 0 10% 3%;
+    font-size: large;
+    font-style: italic;
+}
+
+.InfoList {
+    overflow-y: scroll;
+    color: white;
+    align-self: flex-start;
+    padding-left: 15%;
+}
+
+.ListItem {
+    font-size: large;
+    padding: 2% 0;
+    font-weight: bold;
+}
+
