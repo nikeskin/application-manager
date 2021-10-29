@@ -20,18 +20,15 @@ const StyledHeader = styled.div`
   display: inline-flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 10px 100px;
+  padding: 5px 100px;
 `
 
 const Headline = styled.h1`
   font-family: 'Work Sans', sans-serif;
   align-self: center;
-    font-size: 230%;
-    font-weight: 900;
-`
-
-const NavBar = styled.ul`
-    
+  font-size: 230%;
+  font-weight: 500;
+  font-style: italic;
 `
 
 const Text = styled.p`
@@ -41,7 +38,7 @@ const Text = styled.p`
 
 const Logo = styled.img`
   width: 120px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 `
 

@@ -22,9 +22,4 @@ const NavItem = styled(NavLink)`
   :hover {
     color: black;
   }
-
-  &visited {
-    color: white;
-    text-decoration: none;
-  }
 `

@@ -12,7 +12,7 @@ const StyledFooter = styled.h3`
   text-align: center;
   font-size: small;
   margin: 0;
-  padding: 20px;
+  padding: 1%;
   background-color: #F27649;
   color: black;
 `
