@@ -20,7 +20,7 @@ import static org.hamcrest.Matchers.arrayContainingInAnyOrder;
 import static org.hamcrest.Matchers.is;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ApplicationsControllerTest {
+    class ApplicationsControllerTest {
 
     @Autowired
     private TestRestTemplate testRestTemplate;
@@ -28,10 +28,10 @@ public class ApplicationsControllerTest {
     @Autowired
     private ApplicationsRepo applicationsRepo;
 
-    @BeforeEach
-    public void clearDb() {
-        applicationsRepo.deleteAll();
-    }
+//    @BeforeEach
+//    public void clearDb() {
+//        applicationsRepo.deleteAll();
+//    }
 
     @Test
     @DisplayName("Should return a list with all applications from db")

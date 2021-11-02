@@ -1,7 +1,6 @@
 package nicokeskin.applicationmanager.service;
 
 import nicokeskin.applicationmanager.model.Application;
-import nicokeskin.applicationmanager.model.Documentation;
 import nicokeskin.applicationmanager.repo.ApplicationsRepo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -11,7 +10,7 @@ import java.util.List;
 
 import static org.mockito.Mockito.*;
 
-public class ApplicationsServiceTest {
+    class ApplicationsServiceTest {
 
     private final ApplicationsRepo applicationsRepo = mock(ApplicationsRepo.class);
     private final ApplicationsService applicationsService = new ApplicationsService(applicationsRepo);
