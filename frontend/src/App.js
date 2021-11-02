@@ -1,9 +1,9 @@
 import './App.css'
 import {Route, Switch} from "react-router-dom";
-import Homepage from "./components/Homepage";
+import Homepage from "./pages/Homepage";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import AppOverview from "./components/AppOverview";
+import AppOverview from "./pages/AppOverview";
 
 function App() {
     return (

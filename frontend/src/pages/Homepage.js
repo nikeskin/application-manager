@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import "./images/Homepage_Background.jpeg"
+import "../components/images/Homepage_Background.jpeg"
 import "./Homepage.css"
 import Button from '@mui/material/Button';
 import {Link} from "react-router-dom";
@@ -29,6 +29,7 @@ const MaterialUiButton = styled(Button)`
     align-self: flex-start;
     margin-top: 5%;
     margin-left: 10%;
+    margin-bottom: 10%;
     padding: 1% 5%;
     color: black;
     background-color: #F27649;
