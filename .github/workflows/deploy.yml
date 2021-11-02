@@ -46,8 +46,8 @@ jobs:
         run: mvn -B package --file backend/pom.xml
       - uses: actions/upload-artifact@v2
         with:
-          name: appman.jar
-          path: backend/target/appman.jar
+          name: appman.war
+          path: backend/target/appman.war
 
 
   deploy-heroku:
@@ -62,7 +62,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/download-artifact@v2
         with:
-          name: appman.jar
+          name: appman.war
           path: backend/target
       - name: Login to Heroku
         run: heroku container:login
