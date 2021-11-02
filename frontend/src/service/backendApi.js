@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const getApps = () => {
     return axios
-        .get("/overview")
+        .get("api/overview")
         .then(response => {return response.data;
         })
 
