@@ -69,6 +69,6 @@ jobs:
       - name: Login to Heroku
         run: heroku container:login
       - name: Push Docker Container
-        run: heroku container:push web -a application-manager
+        run: heroku container:push web -a appman-applicationmanager
       - name: Deploy heroku container
-        run: heroku container:release web -a application-manager
+        run: heroku container:release web -a appman-applicationmanager
