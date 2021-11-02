@@ -20,7 +20,7 @@ public class Application {
     private String technicalContact;
     private int appId;
     private String appStatus;
-    private int documentationStatus;
+    private float documentationStatus;
     private Documentation documentation;
 
 }

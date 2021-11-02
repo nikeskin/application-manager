@@ -11,7 +11,7 @@ export default function AppCard({ application }) {
             <TechnicalContact>Technical Contact: {application.technicalContact}</TechnicalContact>
             <AppId>Id: {application.appId}</AppId>
             <AppStatus>Application Status: {application.appStatus}</AppStatus>
-            <DocumentationStatus>Documentation Status: {application.documentationStatus}</DocumentationStatus>
+            <DocumentationStatus>Documentation Status: {application.documentationStatus*100}%</DocumentationStatus>
             <MoreButton variant="outlined" startIcon={<ReadMoreIcon />}>
                 Details
             </MoreButton>
