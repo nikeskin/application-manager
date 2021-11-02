@@ -28,10 +28,10 @@ import static org.hamcrest.Matchers.is;
     @Autowired
     private ApplicationsRepo applicationsRepo;
 
-//    @BeforeEach
-//    public void clearDb() {
-//        applicationsRepo.deleteAll();
-//    }
+    @BeforeEach
+    public void clearDb() {
+        applicationsRepo.deleteAll();
+    }
 
     @Test
     @DisplayName("Should return a list with all applications from db")
