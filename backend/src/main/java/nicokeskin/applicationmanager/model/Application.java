@@ -18,8 +18,9 @@ public class Application {
     private String description;
     private String businessContact;
     private String technicalContact;
-    private int AppId;
+    private int appId;
     private String appStatus;
+    private int documentationStatus;
     private Documentation documentation;
 
 }

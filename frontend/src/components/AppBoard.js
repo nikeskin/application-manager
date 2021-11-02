@@ -14,7 +14,9 @@ export default function AppBoard({ applications }) {
 }
 
 const Section = styled.div`
+  overflow-y: scroll;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding-bottom: 5%;
 `

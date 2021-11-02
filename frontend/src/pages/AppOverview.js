@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import FilterAndSort from "./FilterAndSort";
-import AppBoard from "./AppBoard";
+import FilterAndSort from "../components/FilterAndSort";
+import AppBoard from "../components/AppBoard";
 import useApplications from "../hooks/useApplications";
 
 export default function AppOverview() {
