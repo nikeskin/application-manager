@@ -31,11 +31,6 @@ const Headline = styled.h1`
   font-style: italic;
 `
 
-const Text = styled.p`
-  text-align: right;
-  margin: 0;
-`
-
 const Logo = styled.img`
   width: 120px;
   padding-top: 5px;
