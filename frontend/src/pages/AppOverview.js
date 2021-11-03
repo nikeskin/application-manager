@@ -9,7 +9,6 @@ export default function AppOverview() {
 
     return (
         <PageLayout>
-            <Header>App Overview</Header>
             <FilterAndSort />
             <AppBoard applications={applications} />
         </PageLayout>)
@@ -20,6 +19,7 @@ const Header = styled.h2`
 `
 
 const PageLayout = styled.div`
+  padding-top: 2%;
   background-color: darkgrey;
   opacity: 95%;
   margin: 0;

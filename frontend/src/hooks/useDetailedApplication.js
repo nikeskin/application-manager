@@ -12,5 +12,9 @@ export default function useDetailedApplication() {
             .catch(error => console.error(error))
     }, [])
 
-    return { application, getAppById }
+    const getFormattedDescription = description => {
+        return description.replace()
+    }
+
+    return { application, getAppById, getFormattedDescription }
 }
