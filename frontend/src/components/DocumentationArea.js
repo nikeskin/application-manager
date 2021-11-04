@@ -1,19 +1,120 @@
 import styled from "styled-components";
+import EmailIcon from '@mui/icons-material/Email';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { SiJira } from 'react-icons/si';
+import IconButton from '@mui/material/IconButton';
+
+
 
 export default function DocumentationArea({application}) {
+
+    const { documentation } = application;
+    const providedDocumentation = [];
+    const missingDocumentation = [];
+
+    for (const documentationKey in documentation) {
+
+        const checkedDocumentation = {}
+        const key = documentationKey;
+        const type = "type";
+
+        switch (key) {
+            case "conceptOfRolesAndRights":
+                checkedDocumentation[type] = 1;
+                break;
+            case "supplierContract":
+                checkedDocumentation[type] = 2;
+                break;
+            case "technicalDesignConcept":
+                checkedDocumentation[type] = 3;
+                break;
+            case "testingConcept":
+                checkedDocumentation[type] = 4;
+                break;
+            case "userHandbook":
+                checkedDocumentation[type] = 5;
+                break;
+            default: checkedDocumentation[type] = 6;
+        }
+
+        if (documentation[documentationKey] === null) {
+            checkedDocumentation[key] = documentation[documentationKey];
+            missingDocumentation.push(checkedDocumentation);
+        } else {
+            checkedDocumentation[key] = documentation[documentationKey];
+            providedDocumentation.push(checkedDocumentation);
+        }
+
+    }
+
+    console.log(providedDocumentation);
+
+    const getDocumentationFieldName = (typeNumber) => {
+        const typeNumberToOutputMatrix = {
+            1: "Concept of Roles and Rights",
+            2: "Supplier Contract",
+            3: "Technical Design Concept",
+            4: "Testing Concept",
+            5: "User Handbook",
+            6: "No such documentation found"
+        }
+        return typeNumberToOutputMatrix[typeNumber];
+    }
+
+    const getKeyForLink = (typeNumber) => {
+        const typeNumberToOutputMatrix = {
+            1: "conceptOfRolesAndRights",
+            2: "supplierContract",
+            3: "technicalDesignConcept",
+            4: "testingConcept",
+            5: "userHandbook",
+            6: "No such documentation found"
+        }
+        return typeNumberToOutputMatrix[typeNumber];
+    }
 
     return (
         <Layout>
             <Provided>
-                <ProvidedHeadline>Provided:</ProvidedHeadline>
-                <Input>Testing Concept:</Input>
-                <Input>Concept of Rights & Roles:</Input>
-                <Input>IT Concept:</Input>
+                {providedDocumentation.length > 0 && <ProvidedHeadline>Provided:</ProvidedHeadline>}
+                <InputLinkArea>
+                    {providedDocumentation.map((item, index) => {
+                        const fieldName = getDocumentationFieldName(item.type);
+                        const keyForLink = getKeyForLink(item.type);
+                        const link = item[keyForLink];
+                        return (
+                            <>
+                                <Input>{fieldName}:</Input>
+                                <DocumentationLink href={link} target="_blank">{link}</DocumentationLink>
+                            </>
+                        )
+                    })}
+                </InputLinkArea>
             </Provided>
             <Missing>
-                <MissingHeadline>Missing:</MissingHeadline>
-                <Input>User Handbook:</Input>
-                <Input>IT Achitecture:</Input>
+                // TODO: Add missing elements if no documentation is existent
+                {missingDocumentation.length > 0 && <MissingHeadline>Missing:</MissingHeadline>}
+                <InputLinkArea>
+                    {missingDocumentation.map((item, index) => {
+                        console.log(missingDocumentation)
+                        const fieldName = getDocumentationFieldName(item.type);
+                        return (
+                            // TODO: Add section with unique key
+                            <>
+                                <Input>{fieldName}</Input>
+                                <Add title="Add missing documentation">
+                                    <AddCircleIcon/>
+                                </Add>
+                                <MailIcon title="Message responsible contacts">
+                                    <EmailIcon/>
+                                </MailIcon>
+                                <Jira title="Create Jira ticket">
+                                    <SiJira/>
+                                </Jira>
+                            </>
+                        )
+                    })}
+                </InputLinkArea>
             </Missing>
         </Layout>
     )
@@ -28,26 +129,65 @@ const Layout = styled.div`
 
 const Input = styled.div`
   padding-top: 10px;
+  grid-column: 1 / 3;
+`
+
+const DocumentationLink = styled.a`
+  padding-top: 10px;
+  grid-column: 3 / 6;
 `
 
 const Provided = styled.div`
     grid-column: 1 / 5;
+  display: flex;
+  flex-direction: column;
+  padding: 0 1%;
 `
 
 const Missing = styled.div`
     grid-column: 5 / 9;
+  display: flex;
+  flex-direction: column;
+  padding: 0 1%;
+
 `
 
 const ProvidedHeadline = styled.h3`
-  display: flex;
-  flex-direction: column;
   font-weight: bold;
-  color: green;
+  color: darkgreen;
 `
 
 const MissingHeadline = styled.h3`
-  display: flex;
-  flex-direction: column;
   font-weight: bold;
   color: red;
+`
+
+const InputLinkArea = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: min-content;
+`
+
+const MailIcon = styled(IconButton)`
+ && {
+   grid-column: 4/5;
+   padding: 10px 0 0 0;
+   color: black;
+ }
+`
+
+const Add = styled(IconButton)`
+ && {
+   grid-column: 3/4;
+   padding: 10px 0 0 0;
+   color: black;
+ }
+`
+
+const Jira = styled(IconButton)`
+ && {
+   grid-column: 5/6;
+   padding: 10px 0 0 0;
+   color: black;
+ }
 `

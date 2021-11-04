@@ -31,7 +31,7 @@ export default function DetailsPage() {
                 <Input style={{fontStyle: "italic", textAlign: "justify", lineHeight: 1.6}}>{application.description}</Input>
             </DescriptionField>
             <SecondHeadline>Application Documentation</SecondHeadline>
-            <Documentation/>
+            <Documentation application={application}/>
             <ThirdHeadline>Application History</ThirdHeadline>
             <HistoryArea />
         </Wrapper>

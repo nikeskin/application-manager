@@ -21,5 +21,6 @@ public class Application {
     private int appId;
     private String appStatus;
     private double documentationStatus;
+    private Documentation documentation;
 
 }

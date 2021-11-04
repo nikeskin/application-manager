@@ -14,10 +14,6 @@ export default function AppOverview() {
         </PageLayout>)
 }
 
-const Header = styled.h2`
-
-`
-
 const PageLayout = styled.div`
   padding-top: 2%;
   background-color: darkgrey;

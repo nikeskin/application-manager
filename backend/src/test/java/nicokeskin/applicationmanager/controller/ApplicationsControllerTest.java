@@ -38,15 +38,15 @@ import static org.hamcrest.Matchers.is;
     void testListApps() {
         // GIVEN
         Documentation documentation = new Documentation();
-        applicationsRepo.save(new Application("1", "App1", "desc1", "Nico", "Sven", 1001, "live", 0.8));
-        applicationsRepo.save(new Application("2", "App2", "desc2", "Nico", "Maria", 1002, "terminated", 1.0));
+        applicationsRepo.save(new Application("1", "App1", "desc1", "Nico", "Sven", 1001, "live", 0.8, documentation));
+        applicationsRepo.save(new Application("2", "App2", "desc2", "Nico", "Maria", 1002, "terminated", 1.0, documentation));
         // WHEN
         ResponseEntity<Application[]> responseEntity = testRestTemplate.exchange("/api/overview", HttpMethod.GET, new HttpEntity<>(""), Application[].class);
         // THEN
         assertThat(responseEntity.getStatusCode(), is(HttpStatus.OK));
         assertThat(responseEntity.getBody(), arrayContainingInAnyOrder(
-                new Application("1", "App1", "desc1", "Nico", "Sven", 1001, "live", 0.8),
-                new Application("2", "App2", "desc2", "Nico", "Maria", 1002, "terminated", 1.0)
+                new Application("1", "App1", "desc1", "Nico", "Sven", 1001, "live", 0.8, documentation),
+                new Application("2", "App2", "desc2", "Nico", "Maria", 1002, "terminated", 1.0, documentation)
         ));
 
     }
