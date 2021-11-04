@@ -22,9 +22,9 @@ export default function DetailsPage() {
                 <Input>Business Contact: {application.businessContact}</Input>
                 <Input>Technical Contact: {application.technicalContact}</Input>
                 <Input>Application Status: {application.appStatus}</Input>
+                {application.appStatus === "live" ? <Input>Application live since: {application.appStatus} </Input> : <Input>Application terminated since: {application.appStatus} </Input>}
                 <Input>Application Type: {application.type}</Input>
                 <Input>Protection Level: {application.protectionLevel}</Input>
-                <Input>{(application.appStatus === "live") && "Application live since: " + application.appStatus} </Input>
                 <Input>Documentation Status: {application.documentationStatus*100}%</Input>
             </BasicInfo>
             <DescriptionField> Description:
