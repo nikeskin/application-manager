@@ -4,11 +4,13 @@ import {useEffect} from "react";
 import styled from "styled-components";
 import HistoryArea from "../components/HistoryArea";
 import DocumentationArea from "../components/DocumentationArea";
+import useDocumentation from "../hooks/useDocumentation";
 
 export default function DetailsPage() {
 
     const id = useParams();
     const { application, getAppById } = useDetailedApplication();
+    const { missingDocumentation, providedDocumentation, documentationStatus } = useDocumentation(application);
 
     useEffect(() => {
         getAppById(id)
@@ -22,18 +24,17 @@ export default function DetailsPage() {
                 <Input>Business Contact: {application.businessContact}</Input>
                 <Input>Technical Contact: {application.technicalContact}</Input>
                 <Input>Application Status: {application.appStatus}</Input>
-                {application.appStatus === "live" ? <Input>Application live since: {application.appStatus} </Input> : <Input>Application terminated since: {application.appStatus} </Input>}
                 <Input>Application Type: {application.type}</Input>
                 <Input>Protection Level: {application.protectionLevel}</Input>
-                <Input>Documentation Status: {application.documentationStatus*100}%</Input>
+                <Input>Documentation Status: {documentationStatus}%</Input>
             </BasicInfo>
             <DescriptionField> Description:
                 <Input style={{fontStyle: "italic", textAlign: "justify", lineHeight: 1.6}}>{application.description}</Input>
             </DescriptionField>
             <SecondHeadline>Application Documentation</SecondHeadline>
-            <Documentation application={application}/>
+            <Documentation providedDocumentation={providedDocumentation} missingDocumentation={missingDocumentation}/>
             <ThirdHeadline>Application History</ThirdHeadline>
-            <HistoryArea />
+            <HistoryArea application={application} />
         </Wrapper>
 
     )

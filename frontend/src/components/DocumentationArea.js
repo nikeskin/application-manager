@@ -4,50 +4,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { SiJira } from 'react-icons/si';
 import IconButton from '@mui/material/IconButton';
 
-
-
-export default function DocumentationArea({application}) {
-
-    const { documentation } = application;
-    const providedDocumentation = [];
-    const missingDocumentation = [];
-
-    for (const documentationKey in documentation) {
-
-        const checkedDocumentation = {}
-        const key = documentationKey;
-        const type = "type";
-
-        switch (key) {
-            case "conceptOfRolesAndRights":
-                checkedDocumentation[type] = 1;
-                break;
-            case "supplierContract":
-                checkedDocumentation[type] = 2;
-                break;
-            case "technicalDesignConcept":
-                checkedDocumentation[type] = 3;
-                break;
-            case "testingConcept":
-                checkedDocumentation[type] = 4;
-                break;
-            case "userHandbook":
-                checkedDocumentation[type] = 5;
-                break;
-            default: checkedDocumentation[type] = 6;
-        }
-
-        if (documentation[documentationKey] === null) {
-            checkedDocumentation[key] = documentation[documentationKey];
-            missingDocumentation.push(checkedDocumentation);
-        } else {
-            checkedDocumentation[key] = documentation[documentationKey];
-            providedDocumentation.push(checkedDocumentation);
-        }
-
-    }
-
-    console.log(providedDocumentation);
+export default function DocumentationArea({ providedDocumentation, missingDocumentation }) {
 
     const getDocumentationFieldName = (typeNumber) => {
         const typeNumberToOutputMatrix = {
@@ -78,7 +35,7 @@ export default function DocumentationArea({application}) {
             <Provided>
                 {providedDocumentation.length > 0 && <ProvidedHeadline>Provided:</ProvidedHeadline>}
                 <InputLinkArea>
-                    {providedDocumentation.map((item, index) => {
+                    {providedDocumentation.map((item) => {
                         const fieldName = getDocumentationFieldName(item.type);
                         const keyForLink = getKeyForLink(item.type);
                         const link = item[keyForLink];
@@ -92,11 +49,9 @@ export default function DocumentationArea({application}) {
                 </InputLinkArea>
             </Provided>
             <Missing>
-                // TODO: Add missing elements if no documentation is existent
                 {missingDocumentation.length > 0 && <MissingHeadline>Missing:</MissingHeadline>}
                 <InputLinkArea>
-                    {missingDocumentation.map((item, index) => {
-                        console.log(missingDocumentation)
+                    {missingDocumentation.map((item) => {
                         const fieldName = getDocumentationFieldName(item.type);
                         return (
                             // TODO: Add section with unique key
@@ -173,6 +128,9 @@ const MailIcon = styled(IconButton)`
    grid-column: 4/5;
    padding: 10px 0 0 0;
    color: black;
+   :hover {
+     background-color: white;
+   }
  }
 `
 
@@ -181,6 +139,9 @@ const Add = styled(IconButton)`
    grid-column: 3/4;
    padding: 10px 0 0 0;
    color: black;
+   :hover {
+     background-color: white;
+   }
  }
 `
 
@@ -189,5 +150,8 @@ const Jira = styled(IconButton)`
    grid-column: 5/6;
    padding: 10px 0 0 0;
    color: black;
+   :hover {
+     background-color: white;
+   }
  }
 `
