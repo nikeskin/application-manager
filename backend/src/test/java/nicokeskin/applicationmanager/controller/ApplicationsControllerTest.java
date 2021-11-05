@@ -43,13 +43,27 @@ import static org.hamcrest.Matchers.is;
         applicationsRepo.save(new Application("1", "App1", "desc1", "Nico", "Sven", 1001, "live", documentation, new ArrayList<AppEvent>()));
         applicationsRepo.save(new Application("2", "App2", "desc2", "Nico", "Maria", 1002, "terminated", documentation, new ArrayList<AppEvent>()));
         // WHEN
-        ResponseEntity<Application[]> responseEntity = testRestTemplate.exchange("/api/overview", HttpMethod.GET, new HttpEntity<>(""), Application[].class);
+        ResponseEntity<Application[]> response = testRestTemplate.exchange("/api/overview", HttpMethod.GET, new HttpEntity<>(""), Application[].class);
         // THEN
-        assertThat(responseEntity.getStatusCode(), is(HttpStatus.OK));
-        assertThat(responseEntity.getBody(), arrayContainingInAnyOrder(
+        assertThat(response.getStatusCode(), is(HttpStatus.OK));
+        assertThat(response.getBody(), arrayContainingInAnyOrder(
                 new Application("1", "App1", "desc1", "Nico", "Sven", 1001, "live", documentation, new ArrayList<AppEvent>()),
                 new Application("2", "App2", "desc2", "Nico", "Maria", 1002, "terminated", documentation, new ArrayList<AppEvent>())
         ));
 
     }
+
+    @Test
+    @DisplayName("Should return one application from db")
+    void testGetAppById() {
+        //GIVEN
+        Documentation documentation = new Documentation();
+        applicationsRepo.save(new Application("1", "App1", "desc1", "Nico", "Sven", 1001, "live", documentation, new ArrayList<AppEvent>()));
+        //WHEN
+        ResponseEntity<Application> response = testRestTemplate.exchange("/api/details/1", HttpMethod.GET, new HttpEntity<>(""), Application.class);
+        //THEN
+        assertThat(response.getStatusCode(), is(HttpStatus.OK));
+        assertThat(response.getBody(), is(new Application("1", "App1", "desc1", "Nico", "Sven", 1001, "live", documentation, new ArrayList<AppEvent>())));
+    }
+
 }
