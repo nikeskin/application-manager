@@ -8,6 +8,7 @@ export default function useApplications() {
     useEffect(() => {
         getApps()
             .then(apps => setApplications(apps))
+            .catch(err => console.log(err));
     }, [])
 
     return { applications }

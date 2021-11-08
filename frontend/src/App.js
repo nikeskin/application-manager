@@ -4,6 +4,7 @@ import Homepage from "./pages/Homepage";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AppOverview from "./pages/AppOverview";
+import DetailsPage from "./pages/DetailsPage";
 
 function App() {
     return (
@@ -15,6 +16,9 @@ function App() {
                 </Route>
                 <Route exact path="/overview">
                     <AppOverview />
+                </Route>
+                <Route exact path="/details/:id">
+                    <DetailsPage />
                 </Route>
             </Switch>
             <Footer/>

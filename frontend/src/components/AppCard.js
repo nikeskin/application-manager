@@ -1,8 +1,14 @@
 import styled from "styled-components";
 import Button from "@mui/material/Button";
 import ReadMoreIcon from '@mui/icons-material/ReadMore';
+import {useHistory} from "react-router-dom";
+import useDocumentation from "../hooks/useDocumentation";
 
 export default function AppCard({ application }) {
+
+    const history = useHistory()
+
+    const { documentationStatus } = useDocumentation(application);
 
     return (
         <CardLayout>
@@ -11,8 +17,8 @@ export default function AppCard({ application }) {
             <TechnicalContact>Technical Contact: {application.technicalContact}</TechnicalContact>
             <AppId>Id: {application.appId}</AppId>
             <AppStatus>Application Status: {application.appStatus}</AppStatus>
-            <DocumentationStatus>Documentation Status: {application.documentationStatus*100}%</DocumentationStatus>
-            <MoreButton variant="outlined" startIcon={<ReadMoreIcon />}>
+            <DocumentationStatus>Documentation Status: {documentationStatus}%</DocumentationStatus>
+            <MoreButton onClick={() => history.push(`/details/${application.id}`)} variant="outlined" startIcon={<ReadMoreIcon />}>
                 Details
             </MoreButton>
         </CardLayout>

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class ApplicationsService {
@@ -19,5 +21,14 @@ public class ApplicationsService {
 
     public List<Application> getAllApps() {
         return applicationsRepo.findAll();
+    }
+
+    public Application getAppById(String id) {
+        Optional<Application> application = applicationsRepo.findById(id);
+         if (application.isPresent()) {
+             return application.get();
+         } else {
+             throw new NoSuchElementException();
+         }
     }
 }

@@ -9,3 +9,12 @@ export const getApps = () => {
 
 
 }
+
+export const getAppBy = idObject => {
+    const { id } = idObject;
+    return axios
+        .get(`/api/details/${id}`)
+        .then(response => {
+            return response.data
+        })
+}

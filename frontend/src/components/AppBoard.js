@@ -18,5 +18,5 @@ const Section = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding-bottom: 5%;
+  padding-bottom: 2%;
 `
