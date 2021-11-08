@@ -6,6 +6,8 @@ import IconButton from '@mui/material/IconButton';
 
 export default function DocumentationArea({ providedDocumentation, missingDocumentation }) {
 
+    //Todo use one component and have just one list
+
     const getDocumentationFieldName = (typeNumber) => {
         const typeNumberToOutputMatrix = {
             1: "Concept of Roles and Rights",
@@ -31,6 +33,8 @@ export default function DocumentationArea({ providedDocumentation, missingDocume
     }
 
     return (
+
+        // Todo hardcode list / no map needed
         <Layout>
             <Provided>
                 {providedDocumentation.length > 0 && <ProvidedHeadline>Provided:</ProvidedHeadline>}

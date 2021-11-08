@@ -9,6 +9,7 @@ export default function AppCard({ application }) {
     const history = useHistory()
 
     const { documentationStatus } = useDocumentation(application);
+    // Todo check in one array for null / not null for doc status
 
     return (
         <CardLayout>
