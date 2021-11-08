@@ -54,7 +54,6 @@ export default function DocumentationArea({ providedDocumentation, missingDocume
                     {missingDocumentation.map((item) => {
                         const fieldName = getDocumentationFieldName(item.type);
                         return (
-                            // TODO: Add section with unique key
                             <>
                                 <Input>{fieldName}</Input>
                                 <Add title="Add missing documentation">
