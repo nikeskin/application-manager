@@ -54,10 +54,9 @@ import static org.mockito.Mockito.*;
         @DisplayName("ID not found -> throws NoSuchElementException")
         void testThrowException() {
             //GIVEN
-            Documentation documentation = new Documentation();
-            Application expected = new Application("1", "App1", "desc1", "Nico", "Sven", 1001, "live", documentation, new ArrayList<AppEvent>());
+
             //WHEN
-            when(applicationsRepo.findById("2")).thenThrow(NoSuchElementException.class);
+            when(applicationsRepo.findById("2")).thenReturn(Optional.empty());
             //THEN
             Assertions.assertThrows(NoSuchElementException.class, () -> applicationsService.getAppById("2"));
             verify(applicationsRepo).findById("2");

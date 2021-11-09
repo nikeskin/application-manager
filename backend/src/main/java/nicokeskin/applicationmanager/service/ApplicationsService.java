@@ -24,11 +24,7 @@ public class ApplicationsService {
     }
 
     public Application getAppById(String id) {
-        Optional<Application> application = applicationsRepo.findById(id);
-         if (application.isPresent()) {
-             return application.get();
-         } else {
-             throw new NoSuchElementException();
-         }
+        return applicationsRepo.findById(id).
+                orElseThrow(() -> new NoSuchElementException("element with id " +id + " not found."));
     }
 }
