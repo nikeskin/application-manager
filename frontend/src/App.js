@@ -5,6 +5,8 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AppOverview from "./pages/AppOverview";
 import DetailsPage from "./pages/DetailsPage";
+import AddApp from "./pages/AddApp";
+
 
 function App() {
     return (
@@ -19,6 +21,9 @@ function App() {
                 </Route>
                 <Route exact path="/details/:id">
                     <DetailsPage />
+                </Route>
+                <Route exact path="/add-app">
+                    <AddApp />
                 </Route>
             </Switch>
             <Footer/>

@@ -5,7 +5,7 @@ function Navbar() {
         <NavBarContainer>
             <NavItem to="/">Home</NavItem>
             <NavItem to="/overview">App Overview</NavItem>
-            <NavItem to="/add-application">Add App</NavItem>
+            <NavItem to="/add-app">Add App</NavItem>
         </NavBarContainer>
     )
 }
