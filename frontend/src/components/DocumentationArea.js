@@ -34,7 +34,7 @@ export default function DocumentationArea({ providedDocumentation, missingDocume
 
     return (
 
-        // Todo hardcode list / no map needed
+        // Todo hardcode list / no map needed for provided and missing
         <Layout>
             <Provided>
                 {providedDocumentation.length > 0 && <ProvidedHeadline>Provided:</ProvidedHeadline>}
@@ -58,7 +58,6 @@ export default function DocumentationArea({ providedDocumentation, missingDocume
                     {missingDocumentation.map((item) => {
                         const fieldName = getDocumentationFieldName(item.type);
                         return (
-                            // TODO: Add section with unique key
                             <>
                                 <Input>{fieldName}</Input>
                                 <Add title="Add missing documentation">
