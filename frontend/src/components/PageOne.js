@@ -2,7 +2,7 @@ import styled from "styled-components";
 import TextField from "@mui/material/TextField";
 import {MenuItem} from "@mui/material";
 
-export default function PageOne({appData, setAppData} ) {
+export default function PageOne({ appData, handleChange } ) {
 
     const appStatus = [
         {
@@ -16,10 +16,6 @@ export default function PageOne({appData, setAppData} ) {
         }
     ];
 
-    const handleChange = (event) => {
-        setAppData({...appData, [event.target.name]: event.target.value})
-    }
-
     return (
         <>
             <MuiTextField value={appData.appName} name="appName" onChange={handleChange} fullWidth label="Application Name" id="appName" />
@@ -28,8 +24,7 @@ export default function PageOne({appData, setAppData} ) {
                 onChange={handleChange}
                 fullWidth
                 style={{marginTop: '2%'}}
-                id="selectStatus"
-                select
+                id="appStatus"
                 label="Application Status"
                 defaultValue="release in progress"
             >
@@ -44,7 +39,7 @@ export default function PageOne({appData, setAppData} ) {
                 name="description"
                 onChange={handleChange}
                 style={{marginTop: '2%'}}
-                id="outlined-multiline-static"
+                id="description"
                 fullWidth
                 label="Description"
                 multiline

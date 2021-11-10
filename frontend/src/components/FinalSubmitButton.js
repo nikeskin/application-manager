@@ -1,16 +1,22 @@
 import Button from "@mui/material/Button";
 import styled from "styled-components";
+import {addApp} from "../service/backendApi";
+import {useHistory} from "react-router-dom";
 
-export default function FinalSubmitButton() {
+export default function FinalSubmitButton({ appData }) {
 
-    const log = () => {
-        console.log("submitted")
+    const history = useHistory();
+
+
+    const handleClick = () => {
+        console.log(appData)
+        addApp(appData)
+            .then(() => history.push("/overview"))
+            .catch(console.error);
     }
 
     return (
-
-        <MuiButton onClick={log}>Submit</MuiButton>
-
+        <MuiButton onClick={handleClick}>Submit</MuiButton>
     )
 
 }

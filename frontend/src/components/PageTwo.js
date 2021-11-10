@@ -1,17 +1,28 @@
 import styled from "styled-components";
 import TextField from "@mui/material/TextField";
 
-export default function PageTwo() {
-
+export default function PageTwo({appData, handleChange} ) {
 
     return (
         <>
-            <MuiTextField fullWidth label="Business Contact" id="businessContact" />
-            <MuiTextField style={{marginTop: '2%'}} fullWidth label="Technical Contact" id="technicalContact" />
+            <MuiTextField
+                onChange={handleChange}
+                value={appData.businessContact}
+                name="businessContact"
+                fullWidth
+                label="Business Contact"
+                id="businessContact" />
+            <MuiTextField
+                onChange={handleChange}
+                value={appData.technicalContact}
+                name="technicalContact"
+                style={{marginTop: '2%'}}
+                fullWidth
+                label="Technical Contact"
+                id="technicalContact" />
         </>
 
 )
-
 
 }
 

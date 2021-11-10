@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useState} from "react";
 import styled from "styled-components";
 import * as React from 'react';
 import Box from '@mui/material/Box';
@@ -8,6 +8,7 @@ import PageTwo from "../components/PageTwo";
 import PreviousPageButton from "../components/PreviousPageButton";
 import PageThree from "../components/PageThree";
 import FinalSubmitButton from "../components/FinalSubmitButton";
+import HorizontalLinearStepper from "../components/HorizontalLinearStepper";
 
 
 export default function AddApp() {
@@ -20,7 +21,7 @@ export default function AddApp() {
         technicalContact: "",
         appStatus: "release in progress",
         documentation: {
-            conceptOfRolesAndRights: null,
+            conceptOfRolesAndRights: "",
             supplierContract: null,
             technicalDesignConcept: null,
             testingConcept: null,
@@ -30,25 +31,34 @@ export default function AddApp() {
         applicationHistory: []
     })
 
+    const handleChange = (event) => {
+        if (formNumber < 3) {
+            setAppData({...appData, [event.target.name]: event.target.value})
+        } else if ( formNumber === 3) {
+            const { documentation } = appData;
+            const newDocumentation = {...documentation, [event.target.name]: event.target.value}
+            setAppData({...appData, documentation: newDocumentation})
+        }
+    }
+
     const renderPage = () => {
         switch (formNumber) {
-            // TODO: Parse App data to prepopulate filled fields
             case 1:
                 return (
                     <Page>
-                        <PageOne appData={appData} setAppData={setAppData}/>
+                        <PageOne handleChange={handleChange} appData={appData}/>
                     </Page>
                 )
             case 2:
                 return (
                     <Page>
-                        <PageTwo appData={appData} setAppData={setAppData}/>
+                        <PageTwo handleChange={handleChange} appData={appData}/>
                     </Page>
                 )
             case 3:
                 return (
                     <Page>
-                        <PageThree appData={appData} setAppData={setAppData}/>
+                        <PageThree handleChange={handleChange} appData={appData}/>
                     </Page>
                 )
 
@@ -57,13 +67,6 @@ export default function AddApp() {
         }
     }
 
-
-    useEffect(() => {
-        renderPage()
-        // Eslint disable next line
-    }, [])
-
-
     return (
         <MuiBox
             sx={{
@@ -71,11 +74,11 @@ export default function AddApp() {
             }}
         >
             <form>
+                <HorizontalLinearStepper formNumber={formNumber}/>
                 {renderPage()}
                 {formNumber >1 && <PreviousPageButton setAppData={setAppData} formNumber={formNumber} setFormNumber={setFormNumber}/> }
-                {formNumber <3 && <NextPageButton appData={appData} setAppData={setAppData} formNumber={formNumber} setFormNumber={setFormNumber}/> }
-                {formNumber === 3 && <FinalSubmitButton /> }
-
+                {formNumber <3 && <NextPageButton setAppData={setAppData} formNumber={formNumber} setFormNumber={setFormNumber}/> }
+                {formNumber === 3 && <FinalSubmitButton appData={appData}/> }
             </form>
 
         </MuiBox>
@@ -91,7 +94,7 @@ const MuiBox = styled(Box)`
   && {
     background-color: darkgrey;
     opacity: 95%;
-    padding-top: 5%;
+    padding-top: 2%;
     padding-right: 10%;
     padding-left: 10%;
   }

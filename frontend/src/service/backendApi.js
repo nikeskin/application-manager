@@ -6,8 +6,6 @@ export const getApps = () => {
         .get("api/overview")
         .then(response => {return response.data;
         })
-
-
 }
 
 export const getAppBy = idObject => {
@@ -17,4 +15,10 @@ export const getAppBy = idObject => {
         .then(response => {
             return response.data
         })
+}
+
+export const addApp = app => {
+    return axios
+        .post(`/api/add-app`)
+        .then(response => response.data)
 }
