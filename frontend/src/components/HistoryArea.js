@@ -7,7 +7,7 @@ export default function HistoryArea( {application}) {
     return (
         <ComponentLayout applicationHistory={applicationHistory}>
             {applicationHistory?.slice(0).reverse().map(item => {
-                 return <p style={{gridColumn: 1/2, marginTop:10, marginBottom:0}}>{item.eventDate}: {item.eventDescription}</p>
+                 return <p key={item.eventDescription} style={{gridColumn: 1/2, marginTop:10, marginBottom:0}}>{item.eventDate}: {item.eventDescription}</p>
             }
             )}
         </ComponentLayout>

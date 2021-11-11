@@ -23,13 +23,14 @@ export default function AppForm( { id }) {
                 .then(r => setAppData(r))
                 .catch(console.error);
         }
-    }, [id])
+
+    }, [id, setAppData])
 
     useEffect(() => {
         if (jumpToFormNumber) {
-            setFormNumber(3);
+            setFormNumber(parseInt(jumpToFormNumber));
         }
-    },[])
+    },[jumpToFormNumber, setFormNumber])
 
     return (
 

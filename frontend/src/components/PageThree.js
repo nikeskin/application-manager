@@ -6,12 +6,14 @@ export default function PageThree({handleChange, appData}) {
     return (
         <>
             <MuiTextField
+                value={appData.documentation.conceptOfRolesAndRights}
                 name="conceptOfRolesAndRights"
                 onChange={handleChange}
                 fullWidth
                 label="Concept of Roles and Rights"
                 id="conceptOfRolesAndRights"/>
             <MuiTextField
+                value={appData.documentation.supplierContract}
                 name="supplierContract"
                 onChange={handleChange}
                 style={{marginTop: '2%'}}
@@ -19,6 +21,7 @@ export default function PageThree({handleChange, appData}) {
                 label="Supplier Contract"
                 id="supplierContract"/>
             <MuiTextField
+                value={appData.documentation.technicalDesignConcept}
                 name="technicalDesignConcept"
                 onChange={handleChange}
                 style={{marginTop: '2%'}}
@@ -26,6 +29,7 @@ export default function PageThree({handleChange, appData}) {
                 label="Technical Design Concept"
                 id="technicalDesignConcept"/>
             <MuiTextField
+                value={appData.documentation.testingConcept}
                 name="testingConcept"
                 onChange={handleChange}
                 style={{marginTop: '2%'}}
@@ -33,6 +37,7 @@ export default function PageThree({handleChange, appData}) {
                 label="Testing Concept"
                 id="testingConcept"/>
             <MuiTextField
+                value={appData.documentation.userHandbook}
                 name="userHandbook"
                 onChange={handleChange}
                 style={{marginTop: '2%'}}

@@ -5,6 +5,7 @@ import { SiJira } from 'react-icons/si';
 import IconButton from '@mui/material/IconButton';
 import {useHistory} from "react-router-dom";
 import useForm from "../hooks/useForm";
+import React from "react";
 
 export default function DocumentationArea({ appId, providedDocumentation, missingDocumentation }) {
 
@@ -50,10 +51,10 @@ export default function DocumentationArea({ appId, providedDocumentation, missin
                         const keyForLink = getKeyForLink(item.type);
                         const link = item[keyForLink];
                         return (
-                            <>
+                            <React.Fragment key={fieldName}>
                                 <Input>{fieldName}:</Input>
-                                <DocumentationLink href={link} target="_blank">{link}</DocumentationLink>
-                            </>
+                                <DocumentationLink href={"//"+link} target="_blank">{link}</DocumentationLink>
+                            </React.Fragment>
                         )
                     })}
                 </InputLinkArea>
@@ -64,7 +65,7 @@ export default function DocumentationArea({ appId, providedDocumentation, missin
                     {missingDocumentation.map((item) => {
                         const fieldName = getDocumentationFieldName(item.type);
                         return (
-                            <>
+                            <React.Fragment key={fieldName}>
                                 <Input>{fieldName}</Input>
                                 <Add onClick={handleAddDocumentation} title="Add missing documentation">
                                     <AddCircleIcon/>
@@ -75,7 +76,7 @@ export default function DocumentationArea({ appId, providedDocumentation, missin
                                 <Jira title="Create Jira ticket">
                                     <SiJira/>
                                 </Jira>
-                            </>
+                            </React.Fragment>
                         )
                     })}
                 </InputLinkArea>

@@ -7,8 +7,6 @@ export default function FinalSubmitButton({ appData }) {
 
     const history = useHistory();
 
-        console.log(appData.id)
-
     const handleClick = () => {
         if (appData.id === undefined) {
             addApp(appData)

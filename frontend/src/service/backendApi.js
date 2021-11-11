@@ -24,7 +24,6 @@ export const addApp = app => {
 }
 
 export const editApp = (app, id) => {
-    console.log(id);
     return axios.put(`/api/edit-app/${id}`, app)
         .then(response => response.data)
 }
