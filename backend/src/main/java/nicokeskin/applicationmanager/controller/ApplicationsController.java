@@ -34,4 +34,14 @@ public class ApplicationsController {
         return applicationsService.addApp(application);
     }
 
+    @PutMapping("/edit-app/{id}")
+    public Application updateApp(@PathVariable String id, @RequestBody Application application) {
+
+        if(!id.equals(application.getId())){
+            throw new IllegalArgumentException("Could not update element! Path id does not match with element id in request body!");
+        }
+
+        return applicationsService.updateApp(application);
+    }
+
 }

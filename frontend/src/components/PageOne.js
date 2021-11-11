@@ -27,7 +27,7 @@ export default function PageOne({ appData, handleChange } ) {
                 style={{marginTop: '2%'}}
                 id="appStatus"
                 label="Application Status"
-                defaultValue="release in progress"
+                value={appData.appStatus}
             >
                 {appStatus.map((option) => (
                     <MenuItem key={option.value} value={option.value}>

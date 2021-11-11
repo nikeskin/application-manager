@@ -1,21 +1,28 @@
 import Button from "@mui/material/Button";
 import styled from "styled-components";
-import {addApp} from "../service/backendApi";
+import {addApp, editApp} from "../service/backendApi";
 import {useHistory} from "react-router-dom";
 
 export default function FinalSubmitButton({ appData }) {
 
     const history = useHistory();
 
+        console.log(appData.id)
 
     const handleClick = () => {
-        addApp(appData)
-            .then(() => history.push("/overview"))
-            .catch(console.error);
+        if (appData.id === undefined) {
+            addApp(appData)
+                .then(() => history.push("/overview"))
+                .catch(console.error);
+        } else {
+            editApp(appData, appData.id)
+                .then(() => history.push("/overview"))
+                .catch(console.error);
+        }
     }
 
     return (
-        <MuiButton onClick={handleClick}>Submit</MuiButton>
+        <MuiButton onClick={handleClick}>{appData.id === undefined ? "Submit" : "Submit changes"}</MuiButton>
     )
 
 }

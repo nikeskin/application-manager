@@ -12,8 +12,8 @@ export default function NextPageButton({ setErrorMessage, appData, formNumber, s
 
     const validateInput = (event) => {
         if (formNumber === 1) {
-            if (appData.appName.length === 0 || appData.description.length === 0) {
-                setErrorMessage("Enter a valid application name and description.");
+            if (appData.appStatus.length === 0 || appData.appName.length === 0 || appData.description.length === 0) {
+                setErrorMessage("Enter a valid application name, status and description.");
             } else {
                 increaseFormNumber(event)
                 setErrorMessage("");

@@ -49,4 +49,42 @@ public class ApplicationsService {
         AppEvent createEvent = new AppEvent("Application created with status: " + application.getAppStatus());
         application.getApplicationHistory().add(createEvent);
     }
+
+    public Application updateApp(Application application) {
+        if(applicationsRepo.existsById(application.getId())){
+            setEventForEdit(application);
+            return applicationsRepo.save(application);
+        } else {
+            throw new NoSuchElementException("Could not update Todo element! Element with id does not exist: " + application.getId());
+        }
+        }
+
+    private void setEventForEdit(Application updatedApplication) {
+        Application existingApplication = getAppById(updatedApplication.getId());
+
+        if (!existingApplication.getAppName().equals(updatedApplication.getAppName())) {
+            AppEvent changeAppNameEvent = new AppEvent("Application name changed from: " + existingApplication.getAppName() + " to: " + updatedApplication.getAppName());
+            updatedApplication.getApplicationHistory().add(changeAppNameEvent);
+        }
+
+        if (!existingApplication.getDescription().equals(updatedApplication.getDescription())) {
+            AppEvent changeDescriptionEvent = new AppEvent("Application description changed");
+            updatedApplication.getApplicationHistory().add(changeDescriptionEvent);
+        }
+
+        if (!existingApplication.getAppStatus().equals(updatedApplication.getAppStatus())) {
+            AppEvent changeAppStatusEvent = new AppEvent("Application status changed from: " +existingApplication.getAppStatus() + " to: " + updatedApplication.getAppStatus());
+            updatedApplication.getApplicationHistory().add(changeAppStatusEvent);
+        }
+
+        if (!existingApplication.getBusinessContact().equals(updatedApplication.getBusinessContact())) {
+            AppEvent changeBusinessContactEvent = new AppEvent("Business contact changed from: " +existingApplication.getBusinessContact() + " to: " + updatedApplication.getBusinessContact());
+            updatedApplication.getApplicationHistory().add(changeBusinessContactEvent);
+        }
+
+        if (!existingApplication.getTechnicalContact().equals(updatedApplication.getTechnicalContact())) {
+            AppEvent changeTechnicalContactEvent = new AppEvent("Technical contact changed from: " +existingApplication.getTechnicalContact() + " to: " + updatedApplication.getTechnicalContact());
+            updatedApplication.getApplicationHistory().add(changeTechnicalContactEvent);
+        }
+    }
 }

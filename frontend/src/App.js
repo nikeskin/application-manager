@@ -6,6 +6,8 @@ import Footer from "./components/Footer";
 import AppOverview from "./pages/AppOverview";
 import DetailsPage from "./pages/DetailsPage";
 import AddApp from "./pages/AddApp";
+import EditApp from "./pages/EditApp";
+
 
 
 function App() {
@@ -24,6 +26,9 @@ function App() {
                 </Route>
                 <Route exact path="/add-app">
                     <AddApp />
+                </Route>
+                <Route exact path="/edit/:id">
+                    <EditApp />
                 </Route>
             </Switch>
             <Footer/>

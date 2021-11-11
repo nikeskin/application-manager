@@ -18,8 +18,13 @@ export const getAppBy = idObject => {
 }
 
 export const addApp = app => {
-    console.log("add call")
     return axios
         .post(`/api/add-app`, app)
+        .then(response => response.data)
+}
+
+export const editApp = (app, id) => {
+    console.log(id);
+    return axios.put(`/api/edit-app/${id}`, app)
         .then(response => response.data)
 }

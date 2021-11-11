@@ -4,9 +4,6 @@ export default function HistoryArea( {application}) {
 
     const { applicationHistory } = application;
 
-    console.log(applicationHistory)
-
-
     return (
         <ComponentLayout applicationHistory={applicationHistory}>
             {applicationHistory?.slice(0).reverse().map(item => {

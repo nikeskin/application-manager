@@ -3,8 +3,13 @@ import EmailIcon from '@mui/icons-material/Email';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { SiJira } from 'react-icons/si';
 import IconButton from '@mui/material/IconButton';
+import {useHistory} from "react-router-dom";
+import useForm from "../hooks/useForm";
 
-export default function DocumentationArea({ providedDocumentation, missingDocumentation }) {
+export default function DocumentationArea({ appId, providedDocumentation, missingDocumentation }) {
+
+    const history = useHistory();
+    const { setFormNumber } = useForm();
 
     const getDocumentationFieldName = (typeNumber) => {
         const typeNumberToOutputMatrix = {
@@ -28,6 +33,11 @@ export default function DocumentationArea({ providedDocumentation, missingDocume
             6: "No such documentation found"
         }
         return typeNumberToOutputMatrix[typeNumber];
+    }
+
+    const handleAddDocumentation = () => {
+        history.push("/edit/"+appId+"?formNumber=3");
+        setFormNumber(3);
     }
 
     return (
@@ -56,7 +66,7 @@ export default function DocumentationArea({ providedDocumentation, missingDocume
                         return (
                             <>
                                 <Input>{fieldName}</Input>
-                                <Add title="Add missing documentation">
+                                <Add onClick={handleAddDocumentation} title="Add missing documentation">
                                     <AddCircleIcon/>
                                 </Add>
                                 <MailIcon title="Message responsible contacts">
