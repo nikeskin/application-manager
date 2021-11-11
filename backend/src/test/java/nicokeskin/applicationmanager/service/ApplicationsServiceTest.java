@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
     class ApplicationsServiceTest {
@@ -60,7 +61,22 @@ import static org.mockito.Mockito.*;
             //THEN
             Assertions.assertThrows(NoSuchElementException.class, () -> applicationsService.getAppById("2"));
             verify(applicationsRepo).findById("2");
+        }
 
+        @Test
+        @DisplayName("add application, should return application")
+        void addApplication() {
+            //GIVEN
+            Documentation documentation = new Documentation();
+            Application expected = new Application("1", "App1", "desc1", "Nico", "Sven", 1001, "live", documentation, new ArrayList<AppEvent>());
+            when(applicationsRepo.save(expected)).thenReturn(expected);
+
+            //WHEN
+            Application actual = applicationsService.addApp(expected);
+
+            //THEN
+            assertEquals(expected, actual);
+            verify(applicationsRepo).save(expected);
         }
 
 }

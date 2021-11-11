@@ -18,7 +18,8 @@ export const getAppBy = idObject => {
 }
 
 export const addApp = app => {
+    console.log("add call")
     return axios
-        .post(`/api/add-app`)
+        .post(`/api/add-app`, app)
         .then(response => response.data)
 }

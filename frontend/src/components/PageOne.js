@@ -21,6 +21,7 @@ export default function PageOne({ appData, handleChange } ) {
             <MuiTextField value={appData.appName} name="appName" onChange={handleChange} fullWidth label="Application Name" id="appName" />
             <MuiSelectBox
                 name="appStatus"
+                select
                 onChange={handleChange}
                 fullWidth
                 style={{marginTop: '2%'}}

@@ -4,10 +4,7 @@ package nicokeskin.applicationmanager.controller;
 import nicokeskin.applicationmanager.model.Application;
 import nicokeskin.applicationmanager.service.ApplicationsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,6 +27,11 @@ public class ApplicationsController {
     @GetMapping("/details/{id}")
     public Application getAppById(@PathVariable String id) {
         return applicationsService.getAppById(id);
+    }
+
+    @PostMapping("/add-app")
+    public Application addApp(@RequestBody Application application) {
+        return applicationsService.addApp(application);
     }
 
 }

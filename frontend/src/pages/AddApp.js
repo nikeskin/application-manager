@@ -15,13 +15,15 @@ export default function AddApp() {
 
     const [ formNumber, setFormNumber ] = useState(1);
 
+    const [ errorMessage, setErrorMessage ] = useState ("")
+
     const [ appData, setAppData ] = useState({
         appName: "",
         businessContact: "",
         technicalContact: "",
         appStatus: "release in progress",
         documentation: {
-            conceptOfRolesAndRights: "",
+            conceptOfRolesAndRights: null,
             supplierContract: null,
             technicalDesignConcept: null,
             testingConcept: null,
@@ -76,8 +78,9 @@ export default function AddApp() {
             <form>
                 <HorizontalLinearStepper formNumber={formNumber}/>
                 {renderPage()}
+                { (errorMessage.length > 0 ) && <p style={{color: "red", margin: "2% 0 0 5%"}}>{errorMessage}</p> }
                 {formNumber >1 && <PreviousPageButton setAppData={setAppData} formNumber={formNumber} setFormNumber={setFormNumber}/> }
-                {formNumber <3 && <NextPageButton setAppData={setAppData} formNumber={formNumber} setFormNumber={setFormNumber}/> }
+                {formNumber <3 && <NextPageButton setErrorMessage={setErrorMessage} appData={appData} formNumber={formNumber} setFormNumber={setFormNumber}/> }
                 {formNumber === 3 && <FinalSubmitButton appData={appData}/> }
             </form>
 

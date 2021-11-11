@@ -9,7 +9,6 @@ export default function FinalSubmitButton({ appData }) {
 
 
     const handleClick = () => {
-        console.log(appData)
         addApp(appData)
             .then(() => history.push("/overview"))
             .catch(console.error);

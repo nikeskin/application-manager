@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Data
 @AllArgsConstructor
@@ -16,6 +17,7 @@ public class AppEvent {
 
     public AppEvent(String eventDescription) {
         this.eventDescription = eventDescription;
-        this.eventDate = LocalDateTime.now().toString();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy - HH:mm:ss");
+        this.eventDate = LocalDateTime.now().format(formatter);
     }
 }
