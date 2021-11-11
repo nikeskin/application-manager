@@ -1,10 +1,11 @@
 import Button from "@mui/material/Button";
 import styled from "styled-components";
 
-export default function PreviousPageButton({ formNumber, setFormNumber }) {
+export default function PreviousPageButton({ setErrorMessage, formNumber, setFormNumber }) {
 
     const decreaseFormNumber = (event) => {
         event.preventDefault();
+        setErrorMessage("");
         const newFormNumber = formNumber-1;
         setFormNumber(newFormNumber);
     }

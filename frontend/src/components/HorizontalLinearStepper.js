@@ -4,25 +4,8 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import styled from "styled-components";
-import { createTheme } from "@mui/material";
 
 const steps = ['General Info', 'Contacts', 'Documentation'];
-
-const theme = createTheme({
-    overrides: {
-        MuiStepIcon: {
-            root: {
-                '&$completed': {
-                    color: 'pink',
-                },
-                '&$active': {
-                    color: 'red',
-                },
-            },
-            active: {},
-            completed: {},
-        }
-    }});
 
 export default function HorizontalLinearStepper( { formNumber }) {
 
@@ -34,7 +17,7 @@ export default function HorizontalLinearStepper( { formNumber }) {
                     const labelProps = {};
                     return (
                         <Step key={label} {...stepProps}>
-                            <MuiStepLabel theme={theme} {...labelProps}>{label}</MuiStepLabel>
+                            <MuiStepLabel {...labelProps}>{label}</MuiStepLabel>
                         </Step>
                     );
                 })}

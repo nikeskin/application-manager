@@ -79,11 +79,10 @@ export default function AddApp() {
                 <HorizontalLinearStepper formNumber={formNumber}/>
                 {renderPage()}
                 { (errorMessage.length > 0 ) && <p style={{color: "red", margin: "2% 0 0 5%"}}>{errorMessage}</p> }
-                {formNumber >1 && <PreviousPageButton setAppData={setAppData} formNumber={formNumber} setFormNumber={setFormNumber}/> }
+                {formNumber >1 && <PreviousPageButton setErrorMessage={setErrorMessage} setAppData={setAppData} formNumber={formNumber} setFormNumber={setFormNumber}/> }
                 {formNumber <3 && <NextPageButton setErrorMessage={setErrorMessage} appData={appData} formNumber={formNumber} setFormNumber={setFormNumber}/> }
                 {formNumber === 3 && <FinalSubmitButton appData={appData}/> }
             </form>
-
         </MuiBox>
     )
 
