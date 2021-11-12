@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 public class ApplicationsService {
@@ -59,7 +58,7 @@ public class ApplicationsService {
         }
         }
 
-    private void setEventForEdit(Application updatedApplication) {
+    public void setEventForEdit(Application updatedApplication) {
         Application existingApplication = getAppById(updatedApplication.getId());
 
         if (!existingApplication.getAppName().equals(updatedApplication.getAppName())) {

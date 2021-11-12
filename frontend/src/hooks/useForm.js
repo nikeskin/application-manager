@@ -17,11 +17,11 @@ export default function useForm() {
         technicalContact: "",
         appStatus: "",
         documentation: {
-            conceptOfRolesAndRights: null,
-            supplierContract: null,
-            technicalDesignConcept: null,
-            testingConcept: null,
-            userHandbook: null
+            conceptOfRolesAndRights: "",
+            supplierContract: "",
+            technicalDesignConcept: "",
+            testingConcept: "",
+            userHandbook: ""
         },
         description: "",
         applicationHistory: []

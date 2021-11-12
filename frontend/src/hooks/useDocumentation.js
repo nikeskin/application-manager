@@ -30,7 +30,7 @@ export default function useDocumentation(application) {
             default: checkedDocumentation[type] = 6;
         }
 
-        if (documentation[documentationKey] === null || documentation[documentationKey].length === 0) {
+        if (documentation[documentationKey].length === 0) {
             checkedDocumentation[key] = documentation[documentationKey];
             missingDocumentation.push(checkedDocumentation);
         } else {

@@ -6,6 +6,7 @@ import nicokeskin.applicationmanager.model.Application;
 import nicokeskin.applicationmanager.model.Documentation;
 import nicokeskin.applicationmanager.repo.ApplicationsRepo;
 import nicokeskin.applicationmanager.service.ApplicationsService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,10 +18,10 @@ import org.springframework.http.*;
 import javax.print.Doc;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.arrayContainingInAnyOrder;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
@@ -98,6 +99,37 @@ import static org.mockito.Mockito.when;
         assertEquals(actualId, persistedApplication.getId());
         assertEquals(application.getDescription(), application.getDescription());
         assertEquals(application.getAppStatus(), application.getAppStatus());
+    }
+
+    @Test
+     void putApplicationShouldUpdateItem() {
+        //GIVEN
+        Documentation documentation = new Documentation();
+        Application application = new Application("1", "App1", "desc1", "Nico", "Sven", "live", documentation, new ArrayList<AppEvent>());
+        applicationsRepo.save(application);
+        Application expected = new Application("1", "App1", "desc1", "Nico", "Sven", "terminated", documentation, new ArrayList<AppEvent>());
+
+        //WHEN
+        application.setAppStatus("terminated");
+        testRestTemplate.exchange("/api/edit-app/1", HttpMethod.PUT, new HttpEntity<>(application), Application.class);
+
+        //THEN
+        Application actual = applicationsRepo.findById("1").get();
+        expected.setApplicationHistory(applicationsRepo.findById("1").get().getApplicationHistory());
+        assertEquals(expected, actual);
+    }
+
+    @Test
+     void putApplicationShouldThrowException() {
+        //GIVEN
+
+        //WHEN
+        Documentation documentation = new Documentation();
+        Application application = new Application("2", "App1", "desc1", "Nico", "Sven", "live", documentation, new ArrayList<AppEvent>());
+        ResponseEntity<Application> response = testRestTemplate.exchange("/api/edit-app/1", HttpMethod.PUT, new HttpEntity<>(application), Application.class);
+
+        //THEN
+        assertThat(response.getStatusCode(), is(HttpStatus.INTERNAL_SERVER_ERROR));
     }
 
 }

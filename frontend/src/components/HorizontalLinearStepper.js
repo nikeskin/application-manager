@@ -4,7 +4,6 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import styled from "styled-components";
-import {makeStyles} from "@mui/styles";
 
 const steps = ['General Info', 'Contacts', 'Documentation'];
 
