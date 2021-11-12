@@ -10,6 +10,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
     class ApplicationsServiceTest {
@@ -60,7 +63,55 @@ import static org.mockito.Mockito.*;
             //THEN
             Assertions.assertThrows(NoSuchElementException.class, () -> applicationsService.getAppById("2"));
             verify(applicationsRepo).findById("2");
+        }
 
+        @Test
+        @DisplayName("add application, should return application")
+        void addApplication() {
+            //GIVEN
+            Documentation documentation = new Documentation();
+            Application expected = new Application("1", "App1", "desc1", "Nico", "Sven", 1001, "live", documentation, new ArrayList<AppEvent>());
+            when(applicationsRepo.save(expected)).thenReturn(expected);
+
+            //WHEN
+            Application actual = applicationsService.addApp(expected);
+
+            //THEN
+            assertEquals(expected, actual);
+            verify(applicationsRepo).save(expected);
+        }
+
+        @Test
+        void testUpdateApp() {
+            // GIVEN
+            Documentation documentation = new Documentation();
+            Application application = new Application("1", "App1", "desc1", "Nico", "Sven", "live", documentation, new ArrayList<AppEvent>());
+            Application updatedApplication = new Application("1", "App1", "desc1", "Nico", "Sven", "terminated", documentation, new ArrayList<AppEvent>());
+
+            when(applicationsRepo.existsById(any())).thenReturn(true);
+            when(applicationsRepo.save(any())).thenReturn(updatedApplication);
+            when(applicationsRepo.findById(any())).thenReturn(Optional.of(application));
+
+            // WHEN
+            Application actual = applicationsService.updateApp(application);
+
+            // THEN
+            verify(applicationsRepo).save(application);
+            assertThat(actual, is(updatedApplication));
+        }
+
+        @Test
+        void testUpdateApp_elementNotFound() {
+            // GIVEN
+            Documentation documentation = new Documentation();
+            Application application = new Application("123ABC", "App1", "desc1", "Nico", "Sven", 1001, "live", documentation, new ArrayList<AppEvent>());
+
+            when(applicationsRepo.existsById("123ABC")).thenThrow(NoSuchElementException.class);
+
+            // WHEN
+            Assertions.assertThrows(NoSuchElementException.class, () -> {
+                applicationsService.updateApp(application);
+            });
         }
 
 }

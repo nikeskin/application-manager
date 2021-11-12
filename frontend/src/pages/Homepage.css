@@ -29,7 +29,6 @@
 }
 
 .InfoList {
-    overflow-y: scroll;
     color: white;
     align-self: flex-start;
     padding-left: 15%;

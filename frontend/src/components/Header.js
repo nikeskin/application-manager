@@ -1,12 +1,15 @@
 import styled from "styled-components/macro";
 import logo from "./images/logo_transparent_background.png"
 import Navbar from "./Navbar";
+import {useHistory} from "react-router-dom";
 
 export default function Header() {
 
+    const history = useHistory();
+
     return (
         <StyledHeader>
-            <Logo src={logo} alt="logo" />
+            <Logo onClick={() => history.push("/overview")} src={logo} alt="logo" />
             <Headline>Application Manager</Headline>
             <Navbar />
         </StyledHeader>

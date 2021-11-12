@@ -25,4 +25,14 @@ public class Application {
     private Documentation documentation;
     private List<AppEvent> applicationHistory;
 
+    public Application(String id, String appName, String description, String businessContact, String technicalContact, String appStatus, Documentation documentation, List<AppEvent> applicationHistory) {
+        this.id = id;
+        this.appName = appName;
+        this.description = description;
+        this.businessContact = businessContact;
+        this.technicalContact = technicalContact;
+        this.appStatus = appStatus;
+        this.documentation = documentation;
+        this.applicationHistory = applicationHistory;
+    }
 }

@@ -3,8 +3,14 @@ import EmailIcon from '@mui/icons-material/Email';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { SiJira } from 'react-icons/si';
 import IconButton from '@mui/material/IconButton';
+import {useHistory} from "react-router-dom";
+import useForm from "../hooks/useForm";
+import React from "react";
 
-export default function DocumentationArea({ providedDocumentation, missingDocumentation }) {
+export default function DocumentationArea({ appId, providedDocumentation, missingDocumentation }) {
+
+    const history = useHistory();
+    const { setFormNumber } = useForm();
 
     const getDocumentationFieldName = (typeNumber) => {
         const typeNumberToOutputMatrix = {
@@ -30,6 +36,11 @@ export default function DocumentationArea({ providedDocumentation, missingDocume
         return typeNumberToOutputMatrix[typeNumber];
     }
 
+    const handleAddDocumentation = () => {
+        history.push("/edit/"+appId+"?formNumber=3");
+        setFormNumber(3);
+    }
+
     return (
         <Layout>
             <Provided>
@@ -40,10 +51,10 @@ export default function DocumentationArea({ providedDocumentation, missingDocume
                         const keyForLink = getKeyForLink(item.type);
                         const link = item[keyForLink];
                         return (
-                            <>
+                            <React.Fragment key={fieldName}>
                                 <Input>{fieldName}:</Input>
-                                <DocumentationLink href={link} target="_blank">{link}</DocumentationLink>
-                            </>
+                                <DocumentationLink href={"//"+link} target="_blank">{link}</DocumentationLink>
+                            </React.Fragment>
                         )
                     })}
                 </InputLinkArea>
@@ -54,9 +65,9 @@ export default function DocumentationArea({ providedDocumentation, missingDocume
                     {missingDocumentation.map((item) => {
                         const fieldName = getDocumentationFieldName(item.type);
                         return (
-                            <>
+                            <React.Fragment key={fieldName}>
                                 <Input>{fieldName}</Input>
-                                <Add title="Add missing documentation">
+                                <Add onClick={handleAddDocumentation} title="Add missing documentation">
                                     <AddCircleIcon/>
                                 </Add>
                                 <MailIcon title="Message responsible contacts">
@@ -65,7 +76,7 @@ export default function DocumentationArea({ providedDocumentation, missingDocume
                                 <Jira title="Create Jira ticket">
                                     <SiJira/>
                                 </Jira>
-                            </>
+                            </React.Fragment>
                         )
                     })}
                 </InputLinkArea>
