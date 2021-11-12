@@ -129,7 +129,20 @@ import static org.mockito.Mockito.when;
         ResponseEntity<Application> response = testRestTemplate.exchange("/api/edit-app/1", HttpMethod.PUT, new HttpEntity<>(application), Application.class);
 
         //THEN
-        assertThat(response.getStatusCode(), is(HttpStatus.INTERNAL_SERVER_ERROR));
+        assertThat(response.getStatusCode(), is(HttpStatus.UNPROCESSABLE_ENTITY));
+    }
+
+    @Test
+    void putNotExistingApplicationShouldThrowException() {
+        //GIVEN
+
+        //WHEN
+        Documentation documentation = new Documentation();
+        Application application = new Application("1", "App1", "desc1", "Nico", "Sven", "live", documentation, new ArrayList<AppEvent>());
+        ResponseEntity<Application> response = testRestTemplate.exchange("/api/edit-app/1", HttpMethod.PUT, new HttpEntity<>(application), Application.class);
+
+        //THEN
+        assertThat(response.getStatusCode(), is(HttpStatus.NOT_FOUND));
     }
 
 }
