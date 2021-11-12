@@ -31,7 +31,6 @@ export default function useDocumentation(application) {
             }
 
             if (!documentation[documentationKey]) {
-                console.log(documentation[documentationKey])
                 checkedDocumentation[key] = documentation[documentationKey];
                 missingDocumentation.push(checkedDocumentation);
             } else {
