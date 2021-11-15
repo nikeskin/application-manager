@@ -46,9 +46,9 @@ export default function DocumentationArea({ application, providedDocumentation, 
         console.log(event)
         const subject = appName + " (" + appId + "): Documentation for " + event.name;
         const businessContactMail = businessContact.replace(/ /g,".") + "@test.de";
-        const technicalContact = application.businessContact.replace(/ /g,".") + "@test.de";
+        const technicalContactMail = businessContact.replace(/ /g,".") + "@test.de";
         event.preventDefault();
-        window.open(`mailto:${businessContactMail}?subject=${subject}`);
+        window.open(`mailto:${businessContactMail};${technicalContactMail}?subject=${subject}`);
     }
 
     return (
