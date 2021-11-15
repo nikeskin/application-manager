@@ -9,7 +9,7 @@ import React from "react";
 
 export default function DocumentationArea({ application, providedDocumentation, missingDocumentation }) {
 
-    const { appId, businessContact, technicalContact, appName } = application;
+    const { appId, id, businessContact, technicalContact, appName } = application;
     const history = useHistory();
     const { setFormNumber } = useForm();
 
@@ -38,7 +38,7 @@ export default function DocumentationArea({ application, providedDocumentation, 
     }
 
     const handleAddDocumentation = () => {
-        history.push("/edit/"+appId+"?formNumber=3");
+        history.push("/edit/"+id+"?formNumber=3");
         setFormNumber(3);
     }
 
