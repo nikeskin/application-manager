@@ -44,7 +44,7 @@ export default function DocumentationArea({ application, providedDocumentation, 
 
     const handleMail = (event) => {
         console.log(event)
-        const subject = appName + " (" + appId + "): Documentation for " + event.name;
+        const subject =  "Documentation: " + appName + " (" + appId + ")";
         const businessContactMail = businessContact.replace(/ /g,".") + "@test.de";
         const technicalContactMail = technicalContact.replace(/ /g,".") + "@test.de";
         event.preventDefault();
