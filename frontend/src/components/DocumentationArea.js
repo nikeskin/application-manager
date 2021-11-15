@@ -3,7 +3,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { SiJira } from 'react-icons/si';
 import IconButton from '@mui/material/IconButton';
-import {Link, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import useForm from "../hooks/useForm";
 import React from "react";
 
@@ -46,7 +46,7 @@ export default function DocumentationArea({ application, providedDocumentation, 
         console.log(event)
         const subject = appName + " (" + appId + "): Documentation for " + event.name;
         const businessContactMail = businessContact.replace(/ /g,".") + "@test.de";
-        const technicalContactMail = businessContact.replace(/ /g,".") + "@test.de";
+        const technicalContactMail = technicalContact.replace(/ /g,".") + "@test.de";
         event.preventDefault();
         window.open(`mailto:${businessContactMail};${technicalContactMail}?subject=${subject}`);
     }
