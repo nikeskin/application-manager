@@ -3,12 +3,13 @@ import EmailIcon from '@mui/icons-material/Email';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { SiJira } from 'react-icons/si';
 import IconButton from '@mui/material/IconButton';
-import {useHistory} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import useForm from "../hooks/useForm";
 import React from "react";
 
-export default function DocumentationArea({ appId, providedDocumentation, missingDocumentation }) {
+export default function DocumentationArea({ application, providedDocumentation, missingDocumentation }) {
 
+    const { appId, businessContact, technicalContact, appName } = application;
     const history = useHistory();
     const { setFormNumber } = useForm();
 
@@ -41,6 +42,15 @@ export default function DocumentationArea({ appId, providedDocumentation, missin
         setFormNumber(3);
     }
 
+    const handleMail = (event) => {
+        console.log(event)
+        const subject = appName + " (" + appId + "): Documentation for " + event.name;
+        const businessContactMail = businessContact.replace(/ /g,".") + "@test.de";
+        const technicalContact = application.businessContact.replace(/ /g,".") + "@test.de";
+        event.preventDefault();
+        window.open(`mailto:${businessContactMail}?subject=${subject}`);
+    }
+
     return (
         <Layout>
             <Provided>
@@ -70,8 +80,8 @@ export default function DocumentationArea({ appId, providedDocumentation, missin
                                 <Add onClick={handleAddDocumentation} title="Add missing documentation">
                                     <AddCircleIcon/>
                                 </Add>
-                                <MailIcon title="Message responsible contacts">
-                                    <EmailIcon/>
+                                <MailIcon onClick={handleMail} title="Message responsible contacts">
+                                    <EmailIcon />
                                 </MailIcon>
                                 <Jira title="Create Jira ticket">
                                     <SiJira/>
