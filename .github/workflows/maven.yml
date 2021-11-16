@@ -16,8 +16,8 @@ jobs:
         java-version: '17'
         distribution: 'adopt'
       env:
-        jira.email.address: ${{ JIRA_EMAIL_ADDRESS }}
-        jira.api.key: ${{ JIRA_API_KEY }}
+        JIRA_EMAIL_ADDRESS: ${{ jira.email.address }}
+        JIRA_API_KEY: ${{ jira.api.key }}
     - name: Start MongoDB
       uses: supercharge/mongodb-github-action@1.6.0
       with:
