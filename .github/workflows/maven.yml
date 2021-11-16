@@ -15,7 +15,7 @@ jobs:
       with:
         java-version: '17'
         distribution: 'adopt'
-    - env:
+      env:
         jira.email.address: ${{ JIRA_EMAIL_ADDRESS }}
         jira.api.key: ${{ JIRA_API_KEY }}
     - name: Start MongoDB
