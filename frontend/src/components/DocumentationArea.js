@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import EmailIcon from '@mui/icons-material/Email';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { SiJira } from 'react-icons/si';
+import {SiJira} from 'react-icons/si';
 import IconButton from '@mui/material/IconButton';
 import {useHistory} from "react-router-dom";
 import useForm from "../hooks/useForm";
 import React from "react";
+import {postJiraTicket} from "../service/backendApi";
 
 export default function DocumentationArea({ application, providedDocumentation, missingDocumentation }) {
 
@@ -42,13 +43,19 @@ export default function DocumentationArea({ application, providedDocumentation, 
         setFormNumber(3);
     }
 
-    const handleMail = (event) => {
-        console.log(event)
-        const subject =  "Documentation: " + appName + " (" + appId + ")";
+    const handleMail = (fieldName) => {
+        const subject =  fieldName + ": " + appName + " (" + appId + ")";
         const businessContactMail = businessContact.replace(/ /g,".") + "@test.de";
         const technicalContactMail = technicalContact.replace(/ /g,".") + "@test.de";
-        event.preventDefault();
         window.open(`mailto:${businessContactMail};${technicalContactMail}?subject=${subject}`);
+    }
+
+    const handleJiraTicket = (fieldName) => {
+        postJiraTicket(appId, appName, fieldName)
+            .then((data) => {
+                window.open("https://appman.atlassian.net/jira/software/projects/APMN/boards/1?selectedIssue="+data);
+            })
+            .catch(console.error);
     }
 
     return (
@@ -80,10 +87,10 @@ export default function DocumentationArea({ application, providedDocumentation, 
                                 <Add onClick={handleAddDocumentation} title="Add missing documentation">
                                     <AddCircleIcon/>
                                 </Add>
-                                <MailIcon onClick={handleMail} title="Message responsible contacts">
+                                <MailIcon onClick={() => handleMail(fieldName)} title="Message responsible contacts">
                                     <EmailIcon />
                                 </MailIcon>
-                                <Jira title="Create Jira ticket">
+                                <Jira name={fieldName} onClick={() => handleJiraTicket(fieldName)} title="Create Jira ticket">
                                     <SiJira/>
                                 </Jira>
                             </React.Fragment>

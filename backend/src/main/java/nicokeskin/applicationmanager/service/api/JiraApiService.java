@@ -2,6 +2,7 @@ package nicokeskin.applicationmanager.service.api;
 
 import nicokeskin.applicationmanager.model.api.JiraApiOutput;
 import nicokeskin.applicationmanager.model.api.JiraTicketInput;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -21,6 +22,7 @@ public class JiraApiService {
     @Value("${jira.api.key}")
     private String key;
 
+    @Autowired
     public JiraApiService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }

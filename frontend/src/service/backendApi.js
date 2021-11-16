@@ -27,3 +27,18 @@ export const editApp = (app, id) => {
     return axios.put(`/api/edit-app/${id}`, app)
         .then(response => response.data)
 }
+
+export const postJiraTicket = (appId, appName, fieldName) => {
+
+    const description = "Please provide the missing documentation: " + fieldName + " for the application: " + appName + ".";
+    const summary = fieldName + " for: " + appName + " (" + appId + ")"
+
+    const apiInput = {
+        summary,
+        description
+    }
+
+    return axios
+        .post(`/jira/create-ticket`, apiInput)
+        .then(response => response.data)
+}
