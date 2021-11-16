@@ -63,7 +63,7 @@ export default function DocumentationArea({ application, providedDocumentation, 
                         return (
                             <React.Fragment key={fieldName}>
                                 <Input>{fieldName}:</Input>
-                                <DocumentationLink href={"//"+link} target="_blank">{link}</DocumentationLink>
+                                <DocumentationLink href={link} target="_blank">{link}</DocumentationLink>
                             </React.Fragment>
                         )
                     })}
