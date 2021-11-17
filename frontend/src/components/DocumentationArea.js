@@ -1,17 +1,18 @@
 import styled from "styled-components";
 import EmailIcon from '@mui/icons-material/Email';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { SiJira } from 'react-icons/si';
+import {SiJira} from 'react-icons/si';
 import IconButton from '@mui/material/IconButton';
 import {useHistory} from "react-router-dom";
 import useForm from "../hooks/useForm";
 import React from "react";
+import {postJiraTicket} from "../service/backendApi";
 
-export default function DocumentationArea({ application, providedDocumentation, missingDocumentation }) {
+export default function DocumentationArea({application, providedDocumentation, missingDocumentation}) {
 
-    const { appId, id, businessContact, technicalContact, appName } = application;
+    const {appId, id, businessContact, technicalContact, appName, applicationHistory} = application;
     const history = useHistory();
-    const { setFormNumber } = useForm();
+    const {setFormNumber} = useForm();
 
     const getDocumentationFieldName = (typeNumber) => {
         const typeNumberToOutputMatrix = {
@@ -38,17 +39,34 @@ export default function DocumentationArea({ application, providedDocumentation, 
     }
 
     const handleAddDocumentation = () => {
-        history.push("/edit/"+id+"?formNumber=3");
+        history.push("/edit/" + id + "?formNumber=3");
         setFormNumber(3);
     }
 
-    const handleMail = (event) => {
-        console.log(event)
-        const subject =  "Documentation: " + appName + " (" + appId + ")";
-        const businessContactMail = businessContact.replace(/ /g,".") + "@test.de";
-        const technicalContactMail = technicalContact.replace(/ /g,".") + "@test.de";
-        event.preventDefault();
+    const handleMail = (fieldName) => {
+        const subject = fieldName + ": " + appName + " (" + appId + ")";
+        const businessContactMail = businessContact.replace(/ /g, ".") + "@test.de";
+        const technicalContactMail = technicalContact.replace(/ /g, ".") + "@test.de";
         window.open(`mailto:${businessContactMail};${technicalContactMail}?subject=${subject}`);
+    }
+
+    const handleJiraTicket = (fieldName) => {
+        postJiraTicket(id, appId, appName, fieldName)
+            .then((data) => {
+                window.open("https://appman.atlassian.net/jira/software/projects/APMN/boards/1?selectedIssue=" + data);
+                history.push("#");
+            })
+            .catch(console.error);
+    }
+
+    const checkForTicketEventMatch = fieldName => {
+        for (let i = 0; i < applicationHistory.length; i++) {
+            console.log(applicationHistory[i])
+            console.log(applicationHistory[i].eventDescription + " / " + fieldName)
+            if (applicationHistory[i].eventDescription.startsWith(fieldName)) {
+                return true;
+            }
+        }
     }
 
     return (
@@ -63,7 +81,7 @@ export default function DocumentationArea({ application, providedDocumentation, 
                         return (
                             <React.Fragment key={fieldName}>
                                 <Input>{fieldName}:</Input>
-                                <DocumentationLink href={"//"+link} target="_blank">{link}</DocumentationLink>
+                                <DocumentationLink href={link} target="_blank">{link}</DocumentationLink>
                             </React.Fragment>
                         )
                     })}
@@ -74,18 +92,25 @@ export default function DocumentationArea({ application, providedDocumentation, 
                 <InputLinkArea>
                     {missingDocumentation.map((item) => {
                         const fieldName = getDocumentationFieldName(item.type);
+                        const ticketCreated = checkForTicketEventMatch(fieldName);
                         return (
                             <React.Fragment key={fieldName}>
                                 <Input>{fieldName}</Input>
                                 <Add onClick={handleAddDocumentation} title="Add missing documentation">
                                     <AddCircleIcon/>
                                 </Add>
-                                <MailIcon onClick={handleMail} title="Message responsible contacts">
-                                    <EmailIcon />
+                                <MailIcon onClick={() => handleMail(fieldName)} title="Message responsible contacts">
+                                    <EmailIcon/>
                                 </MailIcon>
-                                <Jira title="Create Jira ticket">
-                                    <SiJira/>
-                                </Jira>
+                                {ticketCreated ?
+                                    <Jira disabled={true}
+                                          title="Ticket already created">
+                                        <SiJira/>
+                                    </Jira> :
+                                    <Jira onClick={() => handleJiraTicket(fieldName)}
+                                          title="Create Jira ticket">
+                                        <SiJira/>
+                                    </Jira>}
                             </React.Fragment>
                         )
                     })}
@@ -113,14 +138,14 @@ const DocumentationLink = styled.a`
 `
 
 const Provided = styled.div`
-    grid-column: 1 / 5;
+  grid-column: 1 / 5;
   display: flex;
   flex-direction: column;
   padding: 0 1%;
 `
 
 const Missing = styled.div`
-    grid-column: 5 / 9;
+  grid-column: 5 / 9;
   display: flex;
   flex-direction: column;
   padding: 0 1%;
@@ -144,34 +169,37 @@ const InputLinkArea = styled.div`
 `
 
 const MailIcon = styled(IconButton)`
- && {
-   grid-column: 4/5;
-   padding: 10px 0 0 0;
-   color: black;
-   :hover {
-     background-color: white;
-   }
- }
+  && {
+    grid-column: 4/5;
+    padding: 10px 0 0 0;
+    color: black;
+
+    :hover {
+      background-color: white;
+    }
+  }
 `
 
 const Add = styled(IconButton)`
- && {
-   grid-column: 3/4;
-   padding: 10px 0 0 0;
-   color: black;
-   :hover {
-     background-color: white;
-   }
- }
+  && {
+    grid-column: 3/4;
+    padding: 10px 0 0 0;
+    color: black;
+
+    :hover {
+      background-color: white;
+    }
+  }
 `
 
 const Jira = styled(IconButton)`
- && {
-   grid-column: 5/6;
-   padding: 10px 0 0 0;
-   color: black;
-   :hover {
-     background-color: white;
-   }
- }
+  && {
+    grid-column: 5/6;
+    padding: 10px 0 0 0;
+    color: black;
+
+    :hover {
+      background-color: white;
+    }
+  }
 `
