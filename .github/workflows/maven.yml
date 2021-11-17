@@ -15,8 +15,6 @@ jobs:
       with:
         java-version: '17'
         distribution: 'adopt'
-      env:
-        JIRA_API_KEY: ${{ secrets.JIRA_API_KEY }}
     - name: Start MongoDB
       uses: supercharge/mongodb-github-action@1.6.0
       with:
