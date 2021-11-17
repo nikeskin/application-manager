@@ -21,7 +21,7 @@ public class TicketController {
 
     @PostMapping("/create-ticket")
     public String createTicket(@RequestBody FrontendInput frontendInput) {
-        return ticketService.createTicket(frontendInput.getDescription(), frontendInput.getSummary());
+        return ticketService.createTicket(frontendInput.getDescription(), frontendInput.getSummary(), frontendInput.getFieldName(), frontendInput.getId());
     }
 
 

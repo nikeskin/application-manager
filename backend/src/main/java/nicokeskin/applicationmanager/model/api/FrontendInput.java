@@ -11,5 +11,7 @@ public class FrontendInput {
 
     private String summary;
     private String description;
+    private String fieldName;
+    private String id;
 
 }
