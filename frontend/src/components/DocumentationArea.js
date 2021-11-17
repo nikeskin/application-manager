@@ -63,7 +63,7 @@ export default function DocumentationArea({application, providedDocumentation, m
         for (let i = 0; i < applicationHistory.length; i++) {
             console.log(applicationHistory[i])
             console.log(applicationHistory[i].eventDescription + " / " + fieldName)
-            if (applicationHistory[i].eventDescription.startsWith(fieldName)) {
+            if (applicationHistory[i].eventDescription.startsWith(fieldName + ": Missing")) {
                 return true;
             }
         }
