@@ -28,14 +28,16 @@ export const editApp = (app, id) => {
         .then(response => response.data)
 }
 
-export const postJiraTicket = (appId, appName, fieldName) => {
+export const postJiraTicket = (id, appId, appName, fieldName) => {
 
     const description = "Please provide the missing documentation: " + fieldName + " for the application: " + appName + ".";
     const summary = fieldName + " for: " + appName + " (" + appId + ")"
 
     const apiInput = {
         summary,
-        description
+        description,
+        fieldName,
+        id
     }
 
     return axios
