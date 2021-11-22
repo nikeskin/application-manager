@@ -3,7 +3,7 @@ import styled from "styled-components/macro";
 export default function Footer() {
 
     return (
-        <StyledFooter>Footer</StyledFooter>
+        <StyledFooter>© A P P M A N - 2 0 2 1</StyledFooter>
     )
 
 }
