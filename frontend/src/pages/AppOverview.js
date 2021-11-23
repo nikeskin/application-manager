@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import FilterAndSort from "../components/FilterAndSort";
 import AppBoard from "../components/AppBoard";
 import useApplications from "../hooks/useApplications";
 
@@ -9,7 +8,6 @@ export default function AppOverview() {
 
     return (
         <PageLayout>
-            <FilterAndSort />
             <AppBoard applications={applications} />
         </PageLayout>)
 }

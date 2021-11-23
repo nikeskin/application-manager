@@ -19,7 +19,7 @@ export default function AppForm( { id }) {
 
     useEffect(() => {
         if (id) {
-            getAppBy(id)
+            getAppBy(id, localStorage.getItem("token"))
                 .then(r => setAppData(r))
                 .catch(console.error);
         }

@@ -3,7 +3,7 @@ import styled from "styled-components/macro";
 export default function Footer() {
 
     return (
-        <StyledFooter>Footer</StyledFooter>
+        <StyledFooter>© A P P M A N - 2 0 2 1</StyledFooter>
     )
 
 }
@@ -13,6 +13,6 @@ const StyledFooter = styled.h3`
   font-size: small;
   margin: 0;
   padding: 1%;
-  background-color: #F27649;
+  background-color: lightgrey;
   color: black;
 `

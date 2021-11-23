@@ -46,5 +46,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8080"
+  "proxy": "http://localhost:8080",
+  "devDependencies": {
+    "react-github-login-button": "^1.0.1"
+  }
 }

@@ -7,6 +7,8 @@ import AppOverview from "./pages/AppOverview";
 import DetailsPage from "./pages/DetailsPage";
 import AddApp from "./pages/AddApp";
 import EditApp from "./pages/EditApp";
+import PrivateRoute from "./routing/PrivateRoute";
+import Login from "./pages/Login";
 
 
 
@@ -18,18 +20,21 @@ function App() {
                 <Route exact path="/">
                     <Homepage />
                 </Route>
-                <Route exact path="/overview">
+                <Route exact path="/login">
+                    <Login />
+                </Route>
+                <PrivateRoute exact path="/overview">
                     <AppOverview />
-                </Route>
-                <Route exact path="/details/:id">
+                </PrivateRoute>
+                <PrivateRoute exact path="/details/:id">
                     <DetailsPage />
-                </Route>
-                <Route exact path="/add-app">
+                </PrivateRoute>
+                <PrivateRoute exact path="/add-app">
                     <AddApp />
-                </Route>
-                <Route exact path="/edit/:id">
+                </PrivateRoute>
+                <PrivateRoute exact path="/edit/:id">
                     <EditApp />
-                </Route>
+                </PrivateRoute>
             </Switch>
             <Footer/>
         </div>

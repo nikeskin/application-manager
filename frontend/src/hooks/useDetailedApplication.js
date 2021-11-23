@@ -7,7 +7,7 @@ export default function useDetailedApplication() {
     const [application, setDetailedApplication] = useState({});
 
     const getAppById = useCallback(id => {
-        getAppBy(id)
+        getAppBy(id, localStorage.getItem("token"))
             .then(app => setDetailedApplication(app))
             .catch(error => console.error(error))
     }, [])

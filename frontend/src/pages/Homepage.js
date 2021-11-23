@@ -17,7 +17,7 @@ export default function Homepage() {
                         <li className="ListItem">Auto-generate tickets for missing documentations</li>
                         <li className="ListItem">Add new apps easily to your environment</li>
                     </ul>
-                    <MaterialUiButton component={Link} to={'/overview'} variant="contained">Go to App Overview</MaterialUiButton>
+                    <MaterialUiButton component={Link} to={'/login'} variant="contained">Login</MaterialUiButton>
                 </div>
             </div>
         </>
