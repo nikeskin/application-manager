@@ -13,6 +13,6 @@ const StyledFooter = styled.h3`
   font-size: small;
   margin: 0;
   padding: 1%;
-  background-color: #F27649;
+  background-color: lightgrey;
   color: black;
 `

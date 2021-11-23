@@ -9,11 +9,11 @@ export default function FinalSubmitButton({ appData }) {
 
     const handleClick = () => {
         if (appData.id === undefined) {
-            addApp(appData)
+            addApp(appData, localStorage.getItem("token"))
                 .then(() => history.push("/overview"))
                 .catch(console.error);
         } else {
-            editApp(appData, appData.id)
+            editApp(appData, appData.id, localStorage.getItem("token"))
                 .then(() => history.push("/overview"))
                 .catch(console.error);
         }

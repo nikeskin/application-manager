@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import  {useEffect, useState} from "react";
 import {getApps} from "../service/backendApi";
 
 export default function useApplications() {
@@ -6,7 +6,7 @@ export default function useApplications() {
     const [applications, setApplications] = useState([]);
 
     useEffect(() => {
-        getApps()
+        getApps(localStorage.getItem("token"))
             .then(apps => setApplications(apps))
             .catch(err => console.log(err));
     }, [])

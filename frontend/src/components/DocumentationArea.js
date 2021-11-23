@@ -51,7 +51,7 @@ export default function DocumentationArea({application, providedDocumentation, m
     }
 
     const handleJiraTicket = (fieldName) => {
-        postJiraTicket(id, appId, appName, fieldName)
+        postJiraTicket(id, appId, appName, fieldName, localStorage.getItem("token"))
             .then((data) => {
                 window.open("https://appman.atlassian.net/jira/software/projects/APMN/boards/1?selectedIssue=" + data);
                 history.push("#");
@@ -61,8 +61,6 @@ export default function DocumentationArea({application, providedDocumentation, m
 
     const checkForTicketEventMatch = fieldName => {
         for (let i = 0; i < applicationHistory.length; i++) {
-            console.log(applicationHistory[i])
-            console.log(applicationHistory[i].eventDescription + " / " + fieldName)
             if (applicationHistory[i].eventDescription.startsWith(fieldName + ": Missing")) {
                 return true;
             }

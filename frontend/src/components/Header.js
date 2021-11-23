@@ -9,7 +9,7 @@ export default function Header() {
 
     return (
         <StyledHeader>
-            <Logo onClick={() => history.push("/overview")} src={logo} alt="logo" />
+            <Logo onClick={() => history.push("/")} src={logo} alt="logo" />
             <Headline>Application Manager</Headline>
             <Navbar />
         </StyledHeader>
