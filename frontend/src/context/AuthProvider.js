@@ -18,7 +18,7 @@ export default function AuthProvider({ children }) {
     //         .catch(console.error);
     // }
 
-    const login = (credentials) => {
+    const login = (credentials, setErrorMessage) => {
         postLogin(credentials)
             .then(response => response.data)
             .then(token => {
@@ -29,7 +29,14 @@ export default function AuthProvider({ children }) {
                 history.push("/overview");
                 window.location.reload();
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err.response.status)
+                if (err.response.status === 401) {
+                    setErrorMessage("Login failed! Please check your username and password.")
+                } else {
+                    return console.error;
+                }
+            })
     }
 
     return (

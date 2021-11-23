@@ -5,6 +5,7 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import GithubButton from "react-github-login-button";
+import * as React from "react";
 
 
 
@@ -16,6 +17,7 @@ const initialState = {
 export default function Login() {
 
     const [credentials, setCredentials] = useState(initialState);
+    const [ errorMessage, setErrorMessage] = useState("");
     const { login } = useContext(AuthContext);
 
     // move clientId to useState and load with useEffect and empty dependency array
@@ -26,7 +28,13 @@ export default function Login() {
 
     function handleClick(event) {
         event.preventDefault();
-        login(credentials);
+        if (credentials.username.length === 0) {
+            setErrorMessage("Please enter an username!")
+        } else if (credentials.password.length === 0) {
+            setErrorMessage("Please enter a password!")
+        } else if (credentials.username.length > 0 && credentials.password.length > 0) {
+            login(credentials, setErrorMessage);
+        }
     }
 
     function loginWithGithub() {
@@ -40,6 +48,7 @@ export default function Login() {
                     <MuiTextField autoComplete="current-password" fullWidth style={{marginTop:"2%"}} label="Password" name="password" type="password" onChange={handleChange}
                            value={credentials.password}
                            required={true}/>
+                { (errorMessage.length > 0 ) && <p style={{color: "red", margin: "2% 0 0 0%"}}>{errorMessage}</p> }
                 <MuiButton onClick={handleClick}>Login</MuiButton>
             </form>
             <form style={{gridColumn: "2/3", justifySelf:"center"}} >
