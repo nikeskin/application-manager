@@ -30,7 +30,6 @@ export default function AuthProvider({ children }) {
                 window.location.reload();
             })
             .catch(err => {
-                console.log(err.response.status)
                 if (err.response.status === 401) {
                     setErrorMessage("Login failed! Please check your username and password.")
                 } else {
