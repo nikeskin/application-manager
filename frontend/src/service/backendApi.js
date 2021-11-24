@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const getApps = (token) => {
     return axios
-        .get("api/overview",
+        .get("api/application",
             {
                 headers : {
                     Authorization : `Bearer ${token}`
@@ -17,7 +17,7 @@ export const getApps = (token) => {
 export const getAppBy = (idObject, token) => {
     const {id} = idObject;
     return axios
-        .get(`/api/details/${id}`,
+        .get(`/api/application/${id}`,
             {
                 headers : {
                     Authorization : `Bearer ${token}`
@@ -30,7 +30,7 @@ export const getAppBy = (idObject, token) => {
 
 export const addApp = (app, token) => {
     return axios
-        .post(`/api/add-app`, app,
+        .post(`/api/application`, app,
             {
                 headers : {
                     Authorization : `Bearer ${token}`
@@ -40,7 +40,7 @@ export const addApp = (app, token) => {
 }
 
 export const editApp = (app, id, token) => {
-    return axios.put(`/api/edit-app/${id}`, app,
+    return axios.put(`/api/application/${id}`, app,
         {
             headers : {
                 Authorization : `Bearer ${token}`
@@ -62,7 +62,7 @@ export const postJiraTicket = (id, appId, appName, fieldName, token) => {
     }
 
     return axios
-        .post(`/jira/create-ticket`, apiInput,
+        .post(`/jira/ticket`, apiInput,
             {
                 headers : {
                     Authorization : `Bearer ${token}`
@@ -73,4 +73,15 @@ export const postJiraTicket = (id, appId, appName, fieldName, token) => {
 
 export const postLogin = credentials => {
     return axios.post("/auth/login", credentials)
+}
+
+export const getClientId = () => {
+    return axios
+        .get('/auth/jira/config')
+        .then(response => response.data);
+}
+
+export const postLoginWithJira = code => {
+    return axios
+        .post('/auth/github', code)
 }

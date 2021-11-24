@@ -1,4 +1,4 @@
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../context/AuthProvider";
 import styled from "styled-components";
 import TextField from "@mui/material/TextField";
@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import GithubButton from "react-github-login-button";
 import * as React from "react";
+import {getClientId} from "../service/backendApi";
 
 
 
@@ -18,7 +19,15 @@ export default function Login() {
 
     const [credentials, setCredentials] = useState(initialState);
     const [ errorMessage, setErrorMessage] = useState("");
+    const [ clientId, setClientId ] = useState("");
     const { login } = useContext(AuthContext);
+
+    useEffect(() => {
+        getClientId().then(clientIdObject => clientIdObject.clientId)
+            .then((id) => {
+                setClientId(id)
+            });
+    }, [])
 
     // move clientId to useState and load with useEffect and empty dependency array
 
@@ -37,8 +46,11 @@ export default function Login() {
         }
     }
 
-    function loginWithGithub() {
-        console.log("login with github")
+    const jiraUrl = `https://auth.atlassian.com/authorize?audience=api.atlassian.com&client_id=${clientId}&scope=read%3Ame&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth&state=test&response_type=code&prompt=consent`;
+
+    function loginWithJira() {
+        console.log(jiraUrl)
+            window.open(jiraUrl);
     }
 
     return (
@@ -53,7 +65,7 @@ export default function Login() {
             </form>
             <form style={{gridColumn: "2/3", justifySelf:"center"}} >
                 <GithubButton
-                    className="button" onClick={loginWithGithub}
+                    className="button" onClick={loginWithJira}
                 />
             </form>
         </MuiBox>

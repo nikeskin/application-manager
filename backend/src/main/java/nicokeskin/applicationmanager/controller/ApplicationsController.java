@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/application")
 public class ApplicationsController {
 
     private final ApplicationsService applicationsService;
@@ -19,22 +19,22 @@ public class ApplicationsController {
         this.applicationsService = applicationsService;
     }
 
-    @GetMapping("/overview")
+    @GetMapping
     public List<Application> getAllApps() {
         return applicationsService.getAllApps();
     }
 
-    @GetMapping("/details/{id}")
+    @GetMapping("{id}")
     public Application getAppById(@PathVariable String id) {
         return applicationsService.getAppById(id);
     }
 
-    @PostMapping("/add-app")
+    @PostMapping
     public Application addApp(@RequestBody Application application) {
         return applicationsService.addApp(application);
     }
 
-    @PutMapping("/edit-app/{id}")
+    @PutMapping("{id}")
     public Application updateApp(@PathVariable String id, @RequestBody Application application) {
 
         if(!id.equals(application.getId())){

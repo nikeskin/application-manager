@@ -8,13 +8,14 @@ export default function AuthProvider({ children }) {
     const [token, setToken] = useState("");
     const history = useHistory();
 
-    // const loginWithGithub = (code) => {
-    //     postGithubCode(code)
+    // const loginWithJira = (code) => {
+    //     postJiraCode(code)
     //         .then(response => response.data)
     //         .then(token => {
     //             setToken(token)
+    //             localStorage.setItem("token", token.toString())
     //         })
-    //         .then(() => history.push(("/")))
+    //         .then(() => history.push(("/overview")))
     //         .catch(console.error);
     // }
 

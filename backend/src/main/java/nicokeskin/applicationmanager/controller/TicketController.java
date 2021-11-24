@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/jira")
+@RequestMapping("/api/ticket")
 public class TicketController {
 
     private final TicketService ticketService;
@@ -19,7 +19,7 @@ public class TicketController {
         this.ticketService = ticketService;
     }
 
-    @PostMapping("/create-ticket")
+    @PostMapping
     public String createTicket(@RequestBody FrontendInput frontendInput) {
         return ticketService.createTicket(frontendInput.getDescription(), frontendInput.getSummary(), frontendInput.getFieldName(), frontendInput.getId());
     }
