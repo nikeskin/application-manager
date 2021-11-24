@@ -73,7 +73,7 @@ import static org.mockito.Mockito.when;
         applicationsRepo.save(new Application("1", "App1", "desc1", "Nico", "Sven", 1001, "live", documentation, new ArrayList<AppEvent>()));
         applicationsRepo.save(new Application("2", "App2", "desc2", "Nico", "Maria", 1002, "terminated", documentation, new ArrayList<AppEvent>()));
         // WHEN
-        ResponseEntity<Application[]> response = testRestTemplate.exchange("/api/overview", HttpMethod.GET, new HttpEntity<>(headers), Application[].class);
+        ResponseEntity<Application[]> response = testRestTemplate.exchange("/api/application", HttpMethod.GET, new HttpEntity<>(headers), Application[].class);
         // THEN
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
         assertThat(response.getBody(), arrayContainingInAnyOrder(
@@ -90,7 +90,7 @@ import static org.mockito.Mockito.when;
         Documentation documentation = new Documentation();
         applicationsRepo.save(new Application("1", "App1", "desc1", "Nico", "Sven", 1001, "live", documentation, new ArrayList<AppEvent>()));
         //WHEN
-        ResponseEntity<Application> response = testRestTemplate.exchange("/api/details/1", HttpMethod.GET, new HttpEntity<>(headers), Application.class);
+        ResponseEntity<Application> response = testRestTemplate.exchange("/api/application/1", HttpMethod.GET, new HttpEntity<>(headers), Application.class);
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
         assertThat(response.getBody(), is(new Application("1", "App1", "desc1", "Nico", "Sven", 1001, "live", documentation, new ArrayList<AppEvent>())));
@@ -105,7 +105,7 @@ import static org.mockito.Mockito.when;
         Application expected = new Application("1", "App1", "desc1", "Nico", "Sven", 1001, "live", documentation, new ArrayList<AppEvent>());
 
         // WHEN
-        ResponseEntity<Application> postResponse = testRestTemplate.exchange("/api/add-app", HttpMethod.POST, new HttpEntity<>(application, headers), Application.class);
+        ResponseEntity<Application> postResponse = testRestTemplate.exchange("/api/application", HttpMethod.POST, new HttpEntity<>(application, headers), Application.class);
         Application actual = postResponse.getBody();
 
         // THEN
@@ -116,7 +116,7 @@ import static org.mockito.Mockito.when;
 
         // THEN: check via GET if element was created
         String actualId = actual.getId();
-        ResponseEntity<Application> getResponse = testRestTemplate.exchange("/api/details/" + actualId, HttpMethod.GET, new HttpEntity<>(headers), Application.class);
+        ResponseEntity<Application> getResponse = testRestTemplate.exchange("/api/application/" + actualId, HttpMethod.GET, new HttpEntity<>(headers), Application.class);
         Application persistedApplication = getResponse.getBody();
 
         assertNotNull(persistedApplication);
@@ -136,7 +136,7 @@ import static org.mockito.Mockito.when;
 
         //WHEN
         application.setAppStatus("terminated");
-        testRestTemplate.exchange("/api/edit-app/1", HttpMethod.PUT, new HttpEntity<>(application, headers), Application.class);
+        testRestTemplate.exchange("/api/application/1", HttpMethod.PUT, new HttpEntity<>(application, headers), Application.class);
 
         //THEN
         Application actual = applicationsRepo.findById("1").get();
@@ -151,7 +151,7 @@ import static org.mockito.Mockito.when;
         //WHEN
         Documentation documentation = new Documentation();
         Application application = new Application("2", "App1", "desc1", "Nico", "Sven", "live", documentation, new ArrayList<AppEvent>());
-        ResponseEntity<Application> response = testRestTemplate.exchange("/api/edit-app/1", HttpMethod.PUT, new HttpEntity<>(application, headers), Application.class);
+        ResponseEntity<Application> response = testRestTemplate.exchange("/api/application/1", HttpMethod.PUT, new HttpEntity<>(application, headers), Application.class);
 
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.UNPROCESSABLE_ENTITY));
@@ -164,7 +164,7 @@ import static org.mockito.Mockito.when;
         //WHEN
         Documentation documentation = new Documentation();
         Application application = new Application("1", "App1", "desc1", "Nico", "Sven", "live", documentation, new ArrayList<AppEvent>());
-        ResponseEntity<Application> response = testRestTemplate.exchange("/api/edit-app/1", HttpMethod.PUT, new HttpEntity<>(application, headers), Application.class);
+        ResponseEntity<Application> response = testRestTemplate.exchange("/api/application/1", HttpMethod.PUT, new HttpEntity<>(application, headers), Application.class);
 
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.NOT_FOUND));
