@@ -9,6 +9,7 @@ import AddApp from "./pages/AddApp";
 import EditApp from "./pages/EditApp";
 import PrivateRoute from "./routing/PrivateRoute";
 import Login from "./pages/Login";
+import Auth from "./pages/Auth";
 
 
 
@@ -22,6 +23,9 @@ function App() {
                 </Route>
                 <Route exact path="/login">
                     <Login />
+                </Route>
+                <Route exact path="/auth">
+                    <Auth />
                 </Route>
                 <PrivateRoute exact path="/overview">
                     <AppOverview />
