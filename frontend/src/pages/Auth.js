@@ -10,8 +10,7 @@ export default function Auth() {
 
     useEffect(() => {
         postLoginWithJira(code)
-            .then()
-    }, [])
+    }, [code])
 
 
     return (
