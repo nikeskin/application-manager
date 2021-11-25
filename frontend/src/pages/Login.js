@@ -4,9 +4,10 @@ import styled from "styled-components";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import GithubButton from "react-github-login-button";
+import { SiJirasoftware } from 'react-icons/si';
 import * as React from "react";
 import {getClientId} from "../service/backendApi";
+import EditIcon from "@mui/icons-material/Edit";
 
 
 
@@ -49,7 +50,6 @@ export default function Login() {
     const jiraUrl = `https://auth.atlassian.com/authorize?audience=api.atlassian.com&client_id=${clientId}&scope=read%3Ame&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth&state=test&response_type=code&prompt=consent`;
 
     function loginWithJira() {
-        console.log(jiraUrl)
             window.open(jiraUrl);
     }
 
@@ -64,9 +64,7 @@ export default function Login() {
                 <MuiButton onClick={handleClick}>Login</MuiButton>
             </form>
             <form style={{gridColumn: "2/3", justifySelf:"center"}} >
-                <GithubButton
-                    className="button" onClick={loginWithJira}
-                />
+                <MuiJiraButton onClick={loginWithJira} startIcon={<JiraButton />}>Login With Jira</MuiJiraButton>
             </form>
         </MuiBox>
     )
@@ -108,3 +106,21 @@ const MuiButton = styled(Button)`
     }
   }
 `
+const MuiJiraButton = styled(Button)`
+  && {
+    padding: 6% 10%;
+    width: 300px;
+    color: white;
+    background-color: darkblue;
+
+    :hover {
+      background-color: dodgerblue;
+    }
+  }
+`
+
+const JiraButton = styled(SiJirasoftware)`
+    font-size: larger;
+    color: white;
+`
+

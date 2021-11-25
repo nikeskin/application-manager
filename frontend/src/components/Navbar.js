@@ -3,6 +3,7 @@ import styled from 'styled-components'
 function Navbar() {
 
 
+
     const handleLogout = () => {
         localStorage.removeItem("token");
         window.location.reload();

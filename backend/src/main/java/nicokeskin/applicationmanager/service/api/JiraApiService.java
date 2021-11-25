@@ -16,9 +16,6 @@ public class JiraApiService {
 
     private final RestTemplate restTemplate;
 
-    @Value("${jira.email.address}")
-    private String email;
-
     @Value("${jira.api.key}")
     private String key;
 
@@ -27,12 +24,12 @@ public class JiraApiService {
         this.restTemplate = restTemplate;
     }
 
-    public JiraApiOutput createTicket(JiraTicketInput jiraTicketInput) {
+    public JiraApiOutput createTicket(JiraTicketInput jiraTicketInput, String username) {
 
         final String url = "https://appman.atlassian.net/rest/api/3/issue/";
 
         HttpHeaders headers = new HttpHeaders();
-        headers.setBasicAuth(email, key);
+        headers.setBasicAuth(username, key);
 
         ResponseEntity<JiraApiOutput> response = restTemplate.exchange(url, HttpMethod.POST, new HttpEntity<>(jiraTicketInput, headers), JiraApiOutput.class);
         return response.getBody();

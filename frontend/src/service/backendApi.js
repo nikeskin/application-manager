@@ -62,7 +62,7 @@ export const postJiraTicket = (id, appId, appName, fieldName, token) => {
     }
 
     return axios
-        .post(`/jira/ticket`, apiInput,
+        .post(`/api/ticket`, apiInput,
             {
                 headers : {
                     Authorization : `Bearer ${token}`
@@ -83,5 +83,5 @@ export const getClientId = () => {
 
 export const postLoginWithJira = code => {
     return axios
-        .post('/auth/github', code)
+        .post('/auth/jira/login', {code})
 }

@@ -1,24 +1,25 @@
 import {useLocation} from "react-router-dom";
 import styled from "styled-components";
-import {useEffect} from "react";
-import {postLoginWithJira} from "../service/backendApi";
+import {useContext, useEffect} from "react";
+import {AuthContext} from "../context/AuthProvider";
 
 export default function Auth() {
 
     const query = new URLSearchParams(useLocation().search);
     const code = query.get("code");
 
-    useEffect(() => {
-        postLoginWithJira(code)
-    }, [code])
+    const { loginWithJira } = useContext(AuthContext);
 
+    useEffect(() => {
+        loginWithJira(code)
+        //eslint-disable-next-line
+    }, [code])
 
     return (
         <Layout>
             <p>You are being logged in!</p>
         </Layout>
     )
-
 }
 
 const Layout = styled.div`
