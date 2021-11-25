@@ -7,9 +7,6 @@ import Button from "@mui/material/Button";
 import { SiJirasoftware } from 'react-icons/si';
 import * as React from "react";
 import {getClientId} from "../service/backendApi";
-import EditIcon from "@mui/icons-material/Edit";
-
-
 
 const initialState = {
     username: "",
@@ -29,8 +26,6 @@ export default function Login() {
                 setClientId(id)
             });
     }, [])
-
-    // move clientId to useState and load with useEffect and empty dependency array
 
     const handleChange = event => {
         setCredentials({...credentials, [event.target.name]: event.target.value})
