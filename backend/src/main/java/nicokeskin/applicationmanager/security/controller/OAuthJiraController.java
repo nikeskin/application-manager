@@ -1,11 +1,10 @@
 package nicokeskin.applicationmanager.security.controller;
 
 import nicokeskin.applicationmanager.security.model.JiraClientIdDto;
+import nicokeskin.applicationmanager.security.model.JiraCodeDto;
 import nicokeskin.applicationmanager.security.service.OAuthJiraService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/auth/jira")
 @RestController
@@ -21,6 +20,11 @@ public class OAuthJiraController {
     @GetMapping("/config")
     public JiraClientIdDto getClientId() {
         return oAuthJiraService.getJiraClientIdDto();
+    }
+
+    @PostMapping("/login")
+    public String loginWithJira(@RequestBody JiraCodeDto code) {
+        return oAuthJiraService.getJwtToken(code.getCode());
     }
 
 }

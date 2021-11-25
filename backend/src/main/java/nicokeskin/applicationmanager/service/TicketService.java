@@ -23,7 +23,7 @@ public class TicketService {
         this.applicationsRepo = applicationsRepo;
     }
 
-    public String createTicket(String description, String summary, String fieldName, String id) {
+    public String createTicket(String description, String summary, String fieldName, String id, String username) {
 
         ContentTwo contentTwo = new ContentTwo(description);
         List<ContentTwo> contentInput = List.of(contentTwo);
@@ -33,7 +33,7 @@ public class TicketService {
         Fields fields = new Fields(summary, fieldsInput);
         JiraTicketInput jiraTicketInput = new JiraTicketInput(fields);
 
-        JiraApiOutput jiraApiOutput = jiraApiService.createTicket(jiraTicketInput);
+        JiraApiOutput jiraApiOutput = jiraApiService.createTicket(jiraTicketInput, username);
 
         Application application = applicationsRepo.findById(id).orElseThrow(() -> new NoSuchElementException("element with id " + id + " not found."));
         setEventForCreation(application, fieldName, jiraApiOutput.getKey());
