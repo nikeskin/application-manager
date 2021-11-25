@@ -50,7 +50,6 @@ export default function Login() {
     const jiraUrl = `https://auth.atlassian.com/authorize?audience=api.atlassian.com&client_id=${clientId}&scope=read%3Ame&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth&state=test&response_type=code&prompt=consent`;
 
     function loginWithJira() {
-        console.log(jiraUrl)
             window.open(jiraUrl);
     }
 

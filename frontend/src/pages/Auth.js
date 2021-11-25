@@ -12,7 +12,6 @@ export default function Auth() {
 
     useEffect(() => {
         loginWithJira(code)
-        console.log("login with jira")
         //eslint-disable-next-line
     }, [code])
 

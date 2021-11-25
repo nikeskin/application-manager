@@ -16,9 +16,6 @@ public class JiraApiService {
 
     private final RestTemplate restTemplate;
 
-    @Value("${jira.email.address}")
-    private String email;
-
     @Value("${jira.api.key}")
     private String key;
 
